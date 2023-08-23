@@ -1,4 +1,5 @@
-﻿using Application.Users.Queries.Login;
+﻿using Application.Users.Commands.Register;
+using Application.Users.Queries.Login;
 using Domain.Entities;
 
 namespace Application.Common.Interfaces
@@ -9,7 +10,6 @@ namespace Application.Common.Interfaces
 
         public string Login(LoginQuery credentials);
 
-        // TODO: Update the register credentials
-        public string Register();
+        public string Register(RegisterUserCommand credentials);
     }
 }
