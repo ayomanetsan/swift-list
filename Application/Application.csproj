@@ -10,7 +10,6 @@
     <Folder Include="Common\Behaviours\" />
     <Folder Include="Common\Mappings\" />
     <Folder Include="Common\Models\" />
-    <Folder Include="Users\Commands\Register\" />
   </ItemGroup>
 
   <ItemGroup>
