@@ -6,10 +6,8 @@ namespace Application.Common.Interfaces
 {
     public interface IUserRepository : IRepository<User>
     {
-        public Task<User> GetByEmailAsync(string email, CancellationToken cancellationToken);
+        public Task<string> LoginAsync(LoginQuery request, CancellationToken cancellationToken);
 
-        public string Login(LoginQuery credentials);
-
-        public string Register(RegisterUserCommand credentials);
+        public Task<string> RegisterAsync(RegisterUserCommand request, CancellationToken cancellationToken);
     }
 }

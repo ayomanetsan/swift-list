@@ -6,8 +6,6 @@
 
         byte[] HashPassword(string password, byte[] salt);
 
-        void StorePassword(string password);
-
         bool VerifyPassword(string password, string hash, string salt);
     }
 }
