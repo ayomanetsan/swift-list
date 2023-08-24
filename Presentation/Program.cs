@@ -21,6 +21,18 @@ builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ClientAppPolicy",
+        builder =>
+        {
+            builder.WithOrigins("http://127.0.0.1:4200")
+                   .AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,6 +47,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseCors("ClientAppPolicy");
 
 app.MapControllers();
 
