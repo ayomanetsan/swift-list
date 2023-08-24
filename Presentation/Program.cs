@@ -26,7 +26,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("ClientAppPolicy",
         builder =>
         {
-            builder.WithOrigins("http://127.0.0.1:4200")
+            builder.WithOrigins("http://localhost:4200")
                    .AllowAnyOrigin()
                    .AllowAnyMethod()
                    .AllowAnyHeader();
@@ -44,11 +44,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("ClientAppPolicy");
+
 app.UseAuthentication();
 
 app.UseAuthorization();
-
-app.UseCors("ClientAppPolicy");
 
 app.MapControllers();
 
