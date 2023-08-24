@@ -11,6 +11,7 @@ import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 })
 export class MainComponent {
 
+  greeting: string = '';
   tasks: Task[] = [];
 
   constructor(private tasksService: TasksService, private dialogRef: MatDialog) { }
@@ -21,6 +22,8 @@ export class MainComponent {
         this.tasks = resp;
       }
     );
+
+    this.greeting = localStorage.getItem('userName')?.split(' ')[0] as string;
   }
 
   openDialog() {
