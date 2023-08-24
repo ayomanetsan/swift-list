@@ -1,0 +1,38 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HttpService {
+
+  private baseUrl = environment.apiUrl;
+
+  constructor(private httpClient: HttpClient) { }
+
+  get<T>(url: string): Observable<T> {
+    return this.httpClient.get<T>(this.buildUrl(url)).pipe(catchError(this.handleError));
+  }
+
+  post<T>(url: string, resource: unknown) {
+    return this.httpClient.post<T>(this.buildUrl(url), resource).pipe(catchError(this.handleError));
+  }
+
+  delete(url: string, id: string | number) {
+    return this.httpClient.delete(`${this.buildUrl(url)}/${id}`).pipe(catchError(this.handleError));
+  }
+
+  put<T>(url: string, resource: T) {
+    return this.httpClient.put<T>(this.buildUrl(url), resource).pipe(catchError(this.handleError));
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    return throwError(() => err);
+  }
+
+  public buildUrl(url: string): string {
+    return this.baseUrl + url;
+  }
+}
