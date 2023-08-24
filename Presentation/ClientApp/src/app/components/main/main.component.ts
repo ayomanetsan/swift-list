@@ -34,4 +34,9 @@ export class MainComponent {
       );
     });
   }
+
+  changeCompletion(task: Task) {
+    this.tasksService.changeCompletion(task.id).subscribe();
+    task.isCompleted = !task.isCompleted;
+  }
 }

@@ -16,4 +16,8 @@ export class TasksService {
   createTask(title: string, description: string) {
     return this.http.post<string>('tasks/create', { title, description });
   }
+
+  changeCompletion(id: string) {
+    return this.http.put(`tasks/mark/?id=${id}`, { });
+  }
 }
