@@ -12,4 +12,8 @@ export class TasksService {
   getTasks() {
     return this.http.get<Task[]>('tasks');
   }
+
+  createTask(title: string, description: string) {
+    return this.http.post<string>('tasks/create', { title, description });
+  }
 }
