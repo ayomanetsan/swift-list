@@ -4,6 +4,6 @@ namespace Application.Common.Interfaces
 {
     public interface ITaskRepository : IRepository<Task>
     {
-        void ChangeCompletion(Task task);
+        System.Threading.Tasks.Task ChangeCompletionAsync(Guid id, CancellationToken cancellationToken);
     }
 }
