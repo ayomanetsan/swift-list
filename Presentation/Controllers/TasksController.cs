@@ -1,6 +1,7 @@
 ﻿using Application.Tasks.Commands.ChangeTaskCompletion;
 using Application.Tasks.Commands.CreateTask;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
@@ -16,6 +17,7 @@ namespace Presentation.Controllers
             _mediator = mediator;
         }
 
+        [Authorize]
         [HttpPost("create")]
         public async Task<IActionResult> CreateTask([FromBody] CreateTaskCommand request, CancellationToken cancellationToken)
         {
@@ -23,8 +25,9 @@ namespace Presentation.Controllers
             return Ok(response);
         }
 
-        [HttpPut("mark/{id}")]
-        public async Task ChangeCompletion(Guid id, CancellationToken cancellationToken)
+        [Authorize]
+        [HttpPut("mark")]
+        public async Task ChangeCompletion([FromQuery] Guid id, CancellationToken cancellationToken)
         {
             var request = new ChangeTaskCompletionCommand() { Id = id };
             await _mediator.Send(request, cancellationToken);

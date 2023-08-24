@@ -8,7 +8,7 @@ namespace Application.Tasks.Commands.CreateTask
         {
             RuleFor(x => x.Title)
                 .NotEmpty().WithMessage("Title is required.")
-                .MinimumLength(8).WithMessage("Title must be at least 4 characters long.")
+                .MinimumLength(4).WithMessage("Title must be at least 4 characters long.")
                 .MaximumLength(32).WithMessage("Title must not exceed 32 characters.");
 
             RuleFor(x => x.Description)
