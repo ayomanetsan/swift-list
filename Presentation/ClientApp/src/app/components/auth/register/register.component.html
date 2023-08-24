@@ -1,0 +1,40 @@
+<div class="container">
+
+    <div class="card">
+
+        <h1>Create an Account</h1>
+
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+            <input type="text" id="fullName" formControlName="fullName" placeholder="Full Name" />
+            <div *ngIf="registrationForm.get('fullName')?.invalid && (registrationForm.get('fullName')?.dirty || registrationForm.get('fullName')?.touched)">
+                <div *ngIf="registrationForm.get('fullName')?.errors?.['required']">Fullname is required</div>
+                <div *ngIf="registrationForm.get('fullName')?.errors?.['minlength']">Fullname must be at least 8 characters long.</div>
+            </div>
+        
+            <input type="email" id="email" formControlName="email" placeholder="Email Address" />
+            <div *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)">
+                <div *ngIf="registrationForm.get('email')?.errors?.['required']">Email is required.</div>
+                <div *ngIf="registrationForm.get('email')?.errors?.['email']">Provided email is not valid.</div>
+            </div>
+        
+            <input type="password" id="password" formControlName="password" placeholder="Password" />
+            <div *ngIf="registrationForm.get('password')?.invalid && (registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched)">
+                <div *ngIf="registrationForm.get('password')?.errors?.['required']">Password is required.</div>
+                <div *ngIf="registrationForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</div>
+                <div *ngIf="registrationForm.get('password')?.errors?.['maxlength']">Password must not exceed 32 characters.</div>
+                <div *ngIf="registrationForm.get('password')?.errors?.['pattern']">
+                    Password must contain at least one uppercase letter, one lowercase letter, one number, and one
+                    special symbol '!,?, *,.'.
+                </div>
+            </div>
+        
+            <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm Password" />
+            <div *ngIf="(registrationForm.get('confirmPassword')?.dirty || registrationForm.get('confirmPassword')?.touched)">
+                <div *ngIf="registrationForm.errors?.['mismatch']">Passwords do not match.</div>
+            </div>
+        
+            <button type="submit" [disabled]="registrationForm.invalid">Register</button>
+        </form>
+        
+    </div>
+</div>

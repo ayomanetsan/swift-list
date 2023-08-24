@@ -3,13 +3,14 @@ import { HttpService } from './http.service';
 
 import jwtDecode from 'jwt-decode';
 import { UserToken } from 'src/app/models/tokens/userToken';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private router: Router) { }
 
   login(email: string, password: string) {
     this.http.post<string>('auth/login', { email, password })
@@ -37,5 +38,7 @@ export class AuthService {
 
     localStorage.setItem('userName', decodedToken.name);
     localStorage.setItem('userEmail', decodedToken.email);
+
+    this.router.navigate(['/main']);
   }
 }
