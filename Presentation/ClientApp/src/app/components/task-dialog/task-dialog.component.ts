@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TasksService } from 'src/app/core/services/tasks.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-task-dialog',
@@ -17,7 +18,8 @@ export class TaskDialogComponent {
   constructor(
     private fb: FormBuilder,
     private tasksService: TasksService,
-    private dialogRef: MatDialogRef<TaskDialogComponent>
+    private dialogRef: MatDialogRef<TaskDialogComponent>,
+    private toastr: ToastrService
   ) { }
 
   get title() {
@@ -33,7 +35,10 @@ export class TaskDialogComponent {
       this.tasksService.createTask(
         this.createForm.value.title,
         this.createForm.value.description
-      ).subscribe(() => this.dialogRef.close());
+      ).subscribe(() => {
+        this.dialogRef.close();
+        this.toastr.success('Task created successfully!', 'Success!');
+      });
     }
   }
 }

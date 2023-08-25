@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TasksService } from 'src/app/core/services/tasks.service';
 import { Task } from 'src/app/models/task';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -12,9 +13,14 @@ import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 export class MainComponent {
 
   greeting: string = '';
+  name: string = '';
+  email: string = '';
   tasks: Task[] = [];
 
-  constructor(private tasksService: TasksService, private dialogRef: MatDialog) { }
+  constructor(
+    private tasksService: TasksService, 
+    private dialogRef: MatDialog,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.tasksService.getTasks().subscribe(
@@ -24,6 +30,9 @@ export class MainComponent {
     );
 
     this.greeting = localStorage.getItem('userName')?.split(' ')[0] as string;
+    this.name = localStorage.getItem('userName') as string;
+    this.email = localStorage.getItem('userEmail') as string;
+    this.authService.startAuthenticatedCheck();
   }
 
   openDialog() {
@@ -41,5 +50,9 @@ export class MainComponent {
   changeCompletion(task: Task) {
     this.tasksService.changeCompletion(task.id).subscribe();
     task.isCompleted = !task.isCompleted;
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
