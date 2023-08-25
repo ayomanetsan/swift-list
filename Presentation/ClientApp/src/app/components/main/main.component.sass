@@ -7,6 +7,7 @@
     height: 100vh
 
     .aside
+        position: relative
         grid-area: aside
         padding: 32px 16px 32px 32px
         border-right: 2px solid $secondary-color
@@ -42,9 +43,33 @@
                 svg
                     height: 24px
 
+        .user
+            position: absolute
+            bottom: 32px
+            display: flex
+            align-items: center
+            justify-content: space-between
+            width: 200px
+
+            .email
+                font-size: 12px
+                opacity: 0.7
+
+            svg
+                height: 24px
+                opacity: 0.7
+                transition: 0.3s
+                cursor: pointer
+                
+                &:hover
+                    fill: $error-color
+                    opacity: 1
+                    transition: 0.3s
+
     .main
         grid-area: main
         padding: 32px 32px 32px 16px
+        overflow-y: scroll
         
         .header
             display: flex

@@ -25,7 +25,7 @@ export class AuthService {
           this.handleAuthentication(token);
         },
         (err) => {
-          this.toastr.error('Error', 'Warning!');
+          this.toastr.error('Invalid email or password.', 'Error!');
         }
       );
   }
@@ -35,6 +35,9 @@ export class AuthService {
     .subscribe(
       (token: string) => {
         this.handleAuthentication(token);
+      },
+      (err) => {
+        this.toastr.error('This email is already registered.', 'Error!');
       }
     );
   }
@@ -71,5 +74,13 @@ export class AuthService {
         this.router.navigate(['/login']);
       }
     }, 60000);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userEmail');
+
+    this.router.navigate(['/login']);
   }
 }
