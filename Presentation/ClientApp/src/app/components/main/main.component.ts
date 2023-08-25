@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TasksService } from 'src/app/core/services/tasks.service';
 import { Task } from 'src/app/models/task';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -14,7 +15,10 @@ export class MainComponent {
   greeting: string = '';
   tasks: Task[] = [];
 
-  constructor(private tasksService: TasksService, private dialogRef: MatDialog) { }
+  constructor(
+    private tasksService: TasksService, 
+    private dialogRef: MatDialog,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.tasksService.getTasks().subscribe(
@@ -24,6 +28,7 @@ export class MainComponent {
     );
 
     this.greeting = localStorage.getItem('userName')?.split(' ')[0] as string;
+    this.authService.startAuthenticatedCheck();
   }
 
   openDialog() {
