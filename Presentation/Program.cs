@@ -1,6 +1,8 @@
 using Application;
+using AspNetCoreRateLimit;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Presentation.Middleware;
 using Presentation.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +22,7 @@ builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddIpRateLimiting(builder.Configuration);
 
 builder.Services.AddCors(options =>
 {
@@ -49,6 +52,10 @@ app.UseCors("ClientAppPolicy");
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+app.UseIpRateLimiting();
 
 app.MapControllers();
 
