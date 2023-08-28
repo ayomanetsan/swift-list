@@ -1,6 +1,7 @@
 using Application;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Presentation.Middleware;
 using Presentation.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,6 +50,8 @@ app.UseCors("ClientAppPolicy");
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllers();
 
