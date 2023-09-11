@@ -9,5 +9,9 @@ namespace Domain.Entities
         public required string Description { get; set; }
 
         public bool IsCompleted { get; set; } = false;
+
+        public Guid ProjectIf { get; set; }
+
+        public Project Project { get; set; } = null!;
     }
 }
