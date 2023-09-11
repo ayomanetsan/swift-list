@@ -10,7 +10,7 @@ namespace Domain.Entities
 
         public bool IsCompleted { get; set; } = false;
 
-        public Guid ProjectIf { get; set; }
+        public Guid ProjectId { get; set; }
 
         public Project Project { get; set; } = null!;
     }

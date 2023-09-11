@@ -20,6 +20,7 @@ namespace Infrastructure
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddTransient<IPasswordManager, PasswordManager>();
             services.AddTransient<IJwtProvider, JwtProvider>();
 

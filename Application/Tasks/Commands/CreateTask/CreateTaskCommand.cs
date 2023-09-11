@@ -8,6 +8,8 @@ namespace Application.Tasks.Commands.CreateTask
 
         public required string Description { get; set; }
 
+        public Guid ProjectId { get; set; }
+
         public string? CreatedBy { get; set; }
     }
 }
