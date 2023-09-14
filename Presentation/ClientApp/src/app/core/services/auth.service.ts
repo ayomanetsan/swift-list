@@ -49,7 +49,7 @@ export class AuthService {
     localStorage.setItem('userName', decodedToken.name);
     localStorage.setItem('userEmail', decodedToken.email);
 
-    this.router.navigate(['/tasks']);
+    this.router.navigate(['/dashboard']);
   }
 
   isAuthenticated() {

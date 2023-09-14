@@ -13,6 +13,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
 import { ToastrModule } from 'ngx-toastr';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { ProjectListComponent } from './components/project-list/project-list.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     RegisterComponent,
     MainComponent,
     TaskDialogComponent,
-    SidebarComponent
+    SidebarComponent,
+    ProjectListComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,
