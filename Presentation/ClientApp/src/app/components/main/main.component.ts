@@ -13,8 +13,6 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class MainComponent {
 
   greeting: string = '';
-  name: string = '';
-  email: string = '';
   tasks: Task[] = [];
 
   constructor(
@@ -30,8 +28,6 @@ export class MainComponent {
     );
 
     this.greeting = localStorage.getItem('userName')?.split(' ')[0] as string;
-    this.name = localStorage.getItem('userName') as string;
-    this.email = localStorage.getItem('userEmail') as string;
     this.authService.startAuthenticatedCheck();
   }
 
@@ -50,9 +46,5 @@ export class MainComponent {
   changeCompletion(task: Task) {
     this.tasksService.changeCompletion(task.id).subscribe();
     task.isCompleted = !task.isCompleted;
-  }
-
-  logout() {
-    this.authService.logout();
   }
 }
