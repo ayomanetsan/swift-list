@@ -15,6 +15,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ProjectListComponent } from './components/project-list/project-list.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { ProjectDialogComponent } from './components/project-dialog/project-dialog.component';
+import { ProjectViewComponent } from './components/project-view/project-view.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { TaskListComponent } from './components/task-list/task-list.component';
     TaskDialogComponent,
     SidebarComponent,
     ProjectListComponent,
-    TaskListComponent
+    TaskListComponent,
+    ProjectDialogComponent,
+    ProjectViewComponent
   ],
   imports: [
     BrowserModule,

@@ -47,7 +47,7 @@ export class ProjectListComponent {
   }
 
   viewProject(id: string) {
-    this.router.navigate(['dashboard/projects', id]);
+    this.router.navigate(['dashboard/projects/tasks', id]);
   }
 
 }

@@ -6,6 +6,7 @@ import { MainComponent } from './components/main/main.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ProjectListComponent } from './components/project-list/project-list.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { ProjectViewComponent } from './components/project-view/project-view.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,7 +20,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'tasks', pathMatch: 'full' },
       { path: 'tasks', component: TaskListComponent },
       { path: 'projects', component: ProjectListComponent },
-
+      { path: 'projects/tasks/:id', component: ProjectViewComponent },
     ],
   },
 ];

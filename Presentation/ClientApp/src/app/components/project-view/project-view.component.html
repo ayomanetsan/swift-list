@@ -1,0 +1,101 @@
+<div class="container">
+    <div class="info">
+        <h3 class="project-name">{{ project!.title }}</h3>
+
+        <div class="tabs">
+            <a class="tab" routerLink="{{baseUrl}}/tasks/{{id}}" routerLinkActive="active"><svg viewBox="0 0 24 24"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10.18 9.32001C9.35999 8.19001 8.05001 7.45001 6.54001 7.45001C4.03001 7.45001 1.98999 9.49 1.98999 12C1.98999 14.51 4.03001 16.55 6.54001 16.55C8.23001 16.55 9.80001 15.66 10.67 14.21L12 12L13.32 9.78998C14.19 8.33998 15.76 7.45001 17.45 7.45001C19.96 7.45001 22 9.49 22 12C22 14.51 19.96 16.55 17.45 16.55C15.95 16.55 14.64 15.81 13.81 14.68"
+                        stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>All Tasks</a>
+
+            <a class="tab" routerLink="{{baseUrl}}/progress/{{id}}" routerLinkActive="active">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 22H22" stroke="#000" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    <path d="M9.75 4V22H14.25V4C14.25 2.9 13.8 2 12.45 2H11.55C10.2 2 9.75 2.9 9.75 4Z" stroke="#000"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M3 10V22H7V10C7 8.9 6.6 8 5.4 8H4.6C3.4 8 3 8.9 3 10Z" stroke="#000" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M17 15V22H21V15C21 13.9 20.6 13 19.4 13H18.6C17.4 13 17 13.9 17 15Z" stroke="#000"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>Progress</a>
+
+            <a class="tab" routerLink="{{baseUrl}}/notes/{{id}}" routerLinkActive="active"><svg viewBox="0 0 24 24"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M21.6601 10.44L20.6801 14.62C19.8401 18.23 18.1801 19.69 15.0601 19.39C14.5601 19.35 14.0201 19.26 13.4401 19.12L11.7601 18.72C7.59006 17.73 6.30006 15.67 7.28006 11.49L8.26006 7.30001C8.46006 6.45001 8.70006 5.71001 9.00006 5.10001C10.1701 2.68001 12.1601 2.03001 15.5001 2.82001L17.1701 3.21001C21.3601 4.19001 22.6401 6.26001 21.6601 10.44Z"
+                        stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path
+                        d="M15.06 19.39C14.44 19.81 13.66 20.16 12.71 20.47L11.13 20.99C7.15998 22.27 5.06997 21.2 3.77997 17.23L2.49997 13.28C1.21997 9.30998 2.27997 7.20998 6.24997 5.92998L7.82997 5.40998C8.23997 5.27998 8.62997 5.16998 8.99997 5.09998C8.69997 5.70998 8.45997 6.44998 8.25997 7.29998L7.27997 11.49C6.29997 15.67 7.58998 17.73 11.76 18.72L13.44 19.12C14.02 19.26 14.56 19.35 15.06 19.39Z"
+                        stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M12.64 8.53003L17.49 9.76003" stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    <path d="M11.66 12.4L14.56 13.14" stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                </svg>Notes</a>
+
+            <a class="tab" routerLink="{{baseUrl}}/important/{{id}}" routerLinkActive="active">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M15.39 5.21L16.7999 8.02999C16.9899 8.41999 17.4999 8.78999 17.9299 8.86999L20.48 9.28999C22.11 9.55999 22.49 10.74 21.32 11.92L19.3299 13.91C18.9999 14.24 18.81 14.89 18.92 15.36L19.4899 17.82C19.9399 19.76 18.9 20.52 17.19 19.5L14.7999 18.08C14.3699 17.82 13.65 17.82 13.22 18.08L10.8299 19.5C9.11994 20.51 8.07995 19.76 8.52995 17.82L9.09996 15.36C9.20996 14.9 9.01995 14.25 8.68995 13.91L6.69996 11.92C5.52996 10.75 5.90996 9.56999 7.53996 9.28999L10.0899 8.86999C10.5199 8.79999 11.03 8.41999 11.22 8.02999L12.63 5.21C13.38 3.68 14.62 3.68 15.39 5.21Z"
+                        stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M8 5H2" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                    <path d="M5 19H2" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                    <path d="M3 12H2" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                </svg>Important</a>
+
+            <a class="tab" routerLink="{{baseUrl}}/archive/{{id}}" routerLinkActive="active">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
+                            stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M9.58997 11L11.09 12.5L15.09 8.5" stroke="#000" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>Archive</a>
+
+            <a class="tab" routerLink="{{baseUrl}}/reminders/{{id}}" routerLinkActive="active"><svg viewBox="0 0 24 24"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2C17.52 2 22 6.48 22 12Z"
+                        stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M15.71 15.18L12.61 13.33C12.07 13.01 11.63 12.24 11.63 11.61V7.51001" stroke="#000"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>Reminders</a>
+        </div>
+    </div>
+
+    <div class="tasks">
+        
+        <div class="header">
+            <h1 class="greeting">Welcome back, {{ greeting }}!</h1>
+        
+            <button>+ New Task</button>
+        </div>
+        
+        <div class="cards">
+            <div class="card" *ngFor="let task of project!.tasks">
+                <h2>{{ task.title }}</h2>
+                <p>{{ task.description }}</p>
+        
+                <div class="line"></div>
+        
+                <button [ngClass]="{'completed': task.isCompleted}" (click)="changeCompletion(task)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <title>checkbox-outline</title>
+                        <path
+                            d="M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,5V19H5V5H19M10,17L6,13L7.41,11.58L10,14.17L16.59,7.58L18,9" />
+                    </svg>
+                    <h4>
+                        {{ task.isCompleted ? 'Completed' : 'Mark as completed' }}
+                    </h4>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

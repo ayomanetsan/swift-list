@@ -16,6 +16,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.name = localStorage.getItem('userName') as string;
     this.email = localStorage.getItem('userEmail') as string;
+    this.authService.startAuthenticatedCheck();
   }
 
   logout() {
