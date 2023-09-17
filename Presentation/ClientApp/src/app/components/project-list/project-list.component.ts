@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ProjectBrief } from 'src/app/models/projectBrief';
 import { ProjectService } from 'src/app/core/services/project.service';
+import { ProjectDialogComponent } from '../project-dialog/project-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-list',
@@ -17,12 +19,14 @@ export class ProjectListComponent {
   constructor(
     private projectService: ProjectService,
     private dialogRef: MatDialog,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
-    this.projectService.getProjects().subscribe(
-      (resp: ProjectBrief[]) => {
-        this.projects = resp;
+    this.projectService.getAll().subscribe(
+      (res: ProjectBrief[]) => {
+        this.projects = res;
       }
     );
 
@@ -31,6 +35,19 @@ export class ProjectListComponent {
   }
 
   openDialog() {
+    this.dialogRef.open(ProjectDialogComponent);
+
+    this.dialogRef.afterAllClosed.subscribe(() => {
+      this.projectService.getAll().subscribe(
+        (res: ProjectBrief[]) => {
+          this.projects = res;
+        }
+      );
+    });
+  }
+
+  viewProject(id: string) {
+    this.router.navigate(['dashboard/projects', id]);
   }
 
 }

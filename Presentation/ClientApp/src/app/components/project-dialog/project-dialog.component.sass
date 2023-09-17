@@ -1,0 +1,72 @@
+@import 'src/styles.sass'
+
+.container
+    display: flex
+    justify-content: center
+    align-items: center
+
+    .card
+        display: flex
+        flex-direction: column
+        align-items: center
+
+        padding: 24px
+        border-radius: 10px
+
+        -webkit-box-shadow: 0px 5px 20px 5px $secondary-color
+        -moz-box-shadow: 0px 5px 20px 5px $secondary-color
+        box-shadow: 0px 5px 20px 5px $secondary-color
+
+        h1
+            font-family: 'Bricolage Grotesque', sans-serif
+
+        form
+            display: flex
+            flex-direction: column
+            align-items: center
+
+            input, textarea
+                width: 360px
+                padding: 8px
+                margin-top: 16px
+                
+                border: 2px solid $secondary-color
+                border-radius: 10px
+                outline: none
+                resize: none
+
+                font-size: 16px
+
+            div
+                width: 360px
+                margin-top: 4px
+
+                color: $error-color
+                font-size: 14px
+
+            p
+                margin-top: 24px
+                font-size: 14px
+
+                a
+                    color: $link-color
+
+        button
+            padding: 12px 28px
+            margin-top: 24px
+
+            background-color: $accent-color
+            color: $primary-color
+            font-size: 18px
+
+            border: none
+            border-radius: 10px
+            outline: none
+            
+            &:hover
+                opacity: 0.9
+                cursor: pointer
+
+            &:disabled
+                opacity: 0.5
+                cursor: not-allowed
