@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/core/services/project.service';
@@ -16,6 +16,7 @@ export class ProjectViewComponent implements OnInit {
 
   id = '';
   project: Project | null = null;
+  tasks: Task[] = [];
   baseUrl = '/dashboard/projects/';
   greeting: string = '';
 
@@ -24,6 +25,7 @@ export class ProjectViewComponent implements OnInit {
     private projectService: ProjectService,
     private tasksService: TasksService,
     private dialogRef: MatDialog,
+    private elementRef: ElementRef
   ) { }
 
   ngOnInit(): void {
@@ -34,9 +36,11 @@ export class ProjectViewComponent implements OnInit {
     this.projectService.get(this.id).subscribe(
       (res: Project | null) => {
         this.project = res;
+        this.tasks = res?.tasks as Task[];
       });
 
     this.greeting = localStorage.getItem('userName')?.split(' ')[0] as string;
+    this.elementRef.nativeElement.querySelector('.sorting > div:first-child').classList.add('active');
   }
 
   openDialog() {
@@ -50,12 +54,40 @@ export class ProjectViewComponent implements OnInit {
       this.projectService.get(this.id).subscribe(
         (res: Project | null) => {
           this.project = res;
+          this.tasks = res?.tasks as Task[];
+          this.applySorting(this.elementRef.nativeElement.querySelector('.sorting > div.active').className.split(' ')[0]);
         });
     });
+  }
+
+  selectSorting(selectedElement: HTMLElement) {
+    const sortingElements = this.elementRef.nativeElement.querySelectorAll('.sorting > div');
+
+    sortingElements.forEach((element: HTMLElement) => {
+      element.classList.remove('active');
+    });
+
+    this.applySorting(selectedElement.className);
+    selectedElement.classList.add('active');
+  }
+
+  applySorting(sorting: string) {
+    switch (sorting) {
+      case 'all':
+        this.tasks = this.project?.tasks as Task[];
+        break;
+      case 'in-progress':
+        this.tasks = this.project?.tasks?.filter(task => !task.isCompleted) as Task[];
+        break;
+      case 'completed':
+        this.tasks = this.project?.tasks?.filter(task => task.isCompleted) as Task[];
+        break;
+    }
   }
 
   changeCompletion(task: Task) {
     this.tasksService.changeCompletion(task.id).subscribe();
     task.isCompleted = !task.isCompleted;
+    this.applySorting(this.elementRef.nativeElement.querySelector('.sorting > div.active').className.split(' ')[0]);
   }
 }

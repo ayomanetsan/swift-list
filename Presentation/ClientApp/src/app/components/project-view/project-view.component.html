@@ -82,8 +82,14 @@
                 </svg>New Task</button>
         </div>
 
+        <div class="sorting">
+            <div #all class="all" (click)="selectSorting(all)">All Tasks</div>
+            <div #inProgress class="in-progress" (click)="selectSorting(inProgress)">In Progress</div>
+            <div #completed class="completed" (click)="selectSorting(completed)">Completed</div>
+        </div>
+
         <div class="cards">
-            <div class="card" *ngFor="let task of project!.tasks">
+            <div class="card" *ngFor="let task of tasks">
                 <h2>{{ task.title }}</h2>
                 <p>{{ task.description }}</p>
 
