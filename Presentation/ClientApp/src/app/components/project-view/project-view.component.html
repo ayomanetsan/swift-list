@@ -70,15 +70,14 @@
     </div>
 
     <div class="tasks">
-
         <div class="header">
             <h1 class="greeting">Welcome back, {{ greeting }}!</h1>
 
             <button (click)="openDialog()"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 12H18" stroke="#000" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        <path d="M12 18V6" stroke="#000" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
+                    <path d="M6 12H18" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                    <path d="M12 18V6" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
                 </svg>New Task</button>
         </div>
 
@@ -90,24 +89,27 @@
 
         <div class="cards">
             <div class="card" *ngFor="let task of tasks">
-                <h2>{{ task.title }}</h2>
-                <p class="task-number">Task #{{ this.project?.tasks!.indexOf(task) + 1 }}</p>
-                <p>{{ task.description }}</p>
+                <div>
+                    <h2>{{ task.title }}</h2>
+                    <p class="task-number">Task #{{ this.project?.tasks!.indexOf(task) + 1 }}</p>
+                    <p>{{ task.description }}</p>
+                </div>
 
-                <div class="line"></div>
+                <div>
+                    <div class="line"></div>
 
-                <button [ngClass]="{'completed': task.isCompleted}" (click)="changeCompletion(task)">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <title>checkbox-outline</title>
-                        <path
-                            d="M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,5V19H5V5H19M10,17L6,13L7.41,11.58L10,14.17L16.59,7.58L18,9" />
-                    </svg>
-                    <h4>
-                        {{ task.isCompleted ? 'Completed' : 'Mark as completed' }}
-                    </h4>
-                </button>
+                    <button [ngClass]="{'completed': task.isCompleted}" (click)="changeCompletion(task)">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <title>checkbox-outline</title>
+                            <path
+                                d="M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,5V19H5V5H19M10,17L6,13L7.41,11.58L10,14.17L16.59,7.58L18,9" />
+                        </svg>
+                        <h4>
+                            {{ task.isCompleted ? 'Completed' : 'Mark as completed' }}
+                        </h4>
+                    </button>
+                </div>
             </div>
         </div>
-
     </div>
 </div>
