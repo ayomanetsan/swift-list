@@ -1,14 +1,12 @@
 ﻿using MediatR;
 
-namespace Application.Tasks.Commands.CreateTask
+namespace Application.Projects.Commands.CreateProject
 {
-    public record CreateTaskCommand() : IRequest<Guid>
+    public record CreateProjectCommand : IRequest<Guid>
     {
         public required string Title { get; set; }
 
         public required string Description { get; set; }
-
-        public Guid ProjectId { get; set; }
 
         public string? CreatedBy { get; set; }
     }

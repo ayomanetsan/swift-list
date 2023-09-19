@@ -12,6 +12,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
 import { ToastrModule } from 'ngx-toastr';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { ProjectListComponent } from './components/project-list/project-list.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
+import { ProjectDialogComponent } from './components/project-dialog/project-dialog.component';
+import { ProjectViewComponent } from './components/project-view/project-view.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,12 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     RegisterComponent,
     MainComponent,
-    TaskDialogComponent
+    TaskDialogComponent,
+    SidebarComponent,
+    ProjectListComponent,
+    TaskListComponent,
+    ProjectDialogComponent,
+    ProjectViewComponent
   ],
   imports: [
     BrowserModule,

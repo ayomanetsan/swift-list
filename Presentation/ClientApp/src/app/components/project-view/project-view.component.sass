@@ -1,0 +1,195 @@
+@import 'src/styles.sass'
+
+.container
+    display: grid
+    grid-template-areas: "info tasks"
+    grid-template-columns: 250px auto
+    height: 100vh
+
+    // TODO: fix this
+    margin: -32px -32px -32px -16px
+
+    .info
+        position: relative
+        grid-area: info
+        padding: 32px 16px 32px 32px
+        border-right: 2px solid $secondary-color
+
+        .project-name
+            margin-bottom: 24px
+
+        .tabs
+            display: flex
+            flex-direction: column
+            gap: 8px
+            margin-top: 16px
+
+            .tab
+                display: flex
+                align-items: center
+                gap: 12px
+                padding: 8px 4px
+                border-radius: 5px
+
+                font-family: 'Bricolage Grotesque', sans-serif
+                font-size: 16px
+                font-weight: 600
+                text-decoration: none
+
+                &:hover
+                    background-color: $secondary-color
+                    opacity: 0.8
+
+                &.active
+                    background-color: $secondary-color
+
+                svg
+                    height: 24px
+
+    .tasks
+        grid-area: tasks
+        padding: 32px 32px 32px 16px
+        overflow-y: scroll
+
+        .header
+            display: flex
+            justify-content: space-between
+            margin-bottom: 16px
+
+            .greeting
+                font-family: 'Bricolage Grotesque', sans-serif
+                
+            button
+                display: flex
+                align-items: center
+                gap: 12px
+                padding: 8px 16px
+                border-radius: 5px
+                border: 2px solid $secondary-color
+                background: none
+                outline: none
+                
+                color: $accent-color
+                font-family: 'Bricolage Grotesque', sans-serif
+
+                transition: 0.3s
+                cursor: pointer
+
+                svg
+                    height: 16px
+                    
+                    path
+                        transition: 0.3s
+
+                &:hover
+                    background-color: $accent-color
+                    color: $primary-color
+
+                    transition: 0.3s
+
+                    svg path
+                        stroke: white
+                        stroke-width: 3px
+                        transition: 0.3s
+
+        .sorting
+            display: inline-flex
+            gap: 0px
+
+            border-radius: 5px
+            border: solid 2px $secondary-color
+
+            div
+                padding: 8px 16px
+                border-right: solid 2px $secondary-color
+                cursor: pointer
+
+                &:first-child
+                    border-radius: 5px 0 0 5px
+
+                &:last-child
+                    border-right: none
+                    border-radius: 0 5px 5px 0
+
+                &.active
+                    background-color: $accent-color
+                    color: $primary-color
+                
+
+        .cards
+            display: flex
+            flex-wrap: wrap
+            gap: 20px
+
+            .card
+                display: flex
+                flex-direction: column
+                justify-content: space-between
+                flex: 1
+                flex-basis: calc(33.33% - 20px)
+                min-width: 200px
+                max-width: calc(33.33% - 20px) 
+                padding: 16px
+                margin-top: 16px
+                border: 2px solid $secondary-color
+                border-radius: 10px
+                
+
+                h2
+                    font-family: 'Bricolage Grotesque', sans-serif
+
+                .task-number
+                    margin-top: 16px
+                    opacity: 0.9
+
+                p
+                    margin-top: 4px
+                    opacity: 0.7
+                    font-size: 14px
+
+                .line
+                    margin-top: 16px
+                    border-bottom: 2px solid $secondary-color
+
+                button
+                    display: flex
+                    align-items: center
+                    gap: 4px
+                    width: 100%
+                    padding: 8px
+                    margin-top: 16px
+
+                    background: none
+                    border-radius: 5px
+                    border: 2px solid $secondary-color
+
+                    cursor: pointer
+                    transition: 0.3s
+
+                    svg
+                        height: 20px
+
+                    &:hover
+                        background-color: $accent-color
+                        transition: 0.3s
+
+                        svg path
+                            stroke: $primary-color
+                            stroke-width: 2px
+                        h4                        
+                            color: $primary-color
+                        
+
+                    &.completed
+                        background: $accent-color
+                        border: none
+
+                        &:hover
+                            opacity: 0.9
+
+                        svg path
+                            stroke: $primary-color
+                            stroke-width: 2px
+                            
+                        h4                        
+                            color: $primary-color

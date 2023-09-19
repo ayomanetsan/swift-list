@@ -13,8 +13,8 @@ export class TasksService {
     return this.http.get<Task[]>('tasks');
   }
 
-  createTask(title: string, description: string) {
-    return this.http.post<string>('tasks/create', { title, description });
+  createTask(title: string, description: string, projectId: string) {
+    return this.http.post<string>('tasks/create', { title, description, projectId });
   }
 
   changeCompletion(id: string) {

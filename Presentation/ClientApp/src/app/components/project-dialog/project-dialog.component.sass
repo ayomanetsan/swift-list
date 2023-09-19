@@ -4,17 +4,14 @@
     display: flex
     justify-content: center
     align-items: center
-    height: 100vh
 
-    .card     
+    .card
         display: flex
         flex-direction: column
         align-items: center
-        width: auto
 
         padding: 24px
         border-radius: 10px
-        border: 2px solid $secondary-color
 
         -webkit-box-shadow: 0px 5px 20px 5px $secondary-color
         -moz-box-shadow: 0px 5px 20px 5px $secondary-color
@@ -28,7 +25,7 @@
             flex-direction: column
             align-items: center
 
-            input
+            input, textarea
                 width: 360px
                 padding: 8px
                 margin-top: 16px
@@ -36,6 +33,7 @@
                 border: 2px solid $secondary-color
                 border-radius: 10px
                 outline: none
+                resize: none
 
                 font-size: 16px
 
