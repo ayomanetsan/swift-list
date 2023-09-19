@@ -21,6 +21,7 @@ namespace Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<IToDoItemRepository, ToDoItemRepository>();
             services.AddTransient<IPasswordManager, PasswordManager>();
             services.AddTransient<IJwtProvider, JwtProvider>();
 
