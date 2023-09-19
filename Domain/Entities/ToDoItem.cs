@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using System.Text.Json.Serialization;
 
 namespace Domain.Entities
 {
@@ -8,6 +9,7 @@ namespace Domain.Entities
 
         public bool IsCompleted { get; set; } = false;
 
+        [JsonIgnore]
         public Task Task { get; set; } = null!;
 
         public Guid TaskId { get; set; }

@@ -2,6 +2,8 @@
 using Domain.Exceptions;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using Task = Domain.Entities.Task;
 
 namespace Infrastructure.Repositories
@@ -29,6 +31,22 @@ namespace Infrastructure.Repositories
         {
             var tasks = await _context.Tasks.Where(t => t.CreatedBy == email).ToListAsync();
             return tasks;
+        }
+
+        public async Task<Task> GetTaskWithDetailsAsync(Guid taskId, CancellationToken cancellationToken)
+        {
+            Task? task = await _context.Tasks
+                .AsNoTracking()
+                .Include(x => x.Labels)
+                .Include(x => x.ToDoItems)
+                .FirstOrDefaultAsync(x => x.Id == taskId, cancellationToken);
+
+            if (task is null)
+            {
+                throw new TaskNotFoundException(taskId);
+            }
+
+            return task;
         }
     }
 }

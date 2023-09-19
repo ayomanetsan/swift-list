@@ -6,6 +6,8 @@ namespace Application.Common.Interfaces
     {
         System.Threading.Tasks.Task ChangeCompletionAsync(Guid id, CancellationToken cancellationToken);
 
-        System.Threading.Tasks.Task<List<Task>> GetTasksByEmailAsync(string email, CancellationToken cancellationToken);
+        Task<List<Task>> GetTasksByEmailAsync(string email, CancellationToken cancellationToken);
+
+        Task<Task> GetTaskWithDetailsAsync(Guid taskId, CancellationToken cancellationToken);
     }
 }

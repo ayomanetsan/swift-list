@@ -1,6 +1,7 @@
 ﻿using Application.Tasks.Commands.ChangeTaskCompletion;
 using Application.Tasks.Commands.CreateTask;
 using Application.Tasks.Queries.GetTasks;
+using Application.Tasks.Queries.GetTaskWithToDoItems;
 using Azure.Core;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -45,9 +46,18 @@ namespace Presentation.Controllers
         public async Task<IActionResult> GetAllTasks(CancellationToken cancellationToken)
         {
             var userClaims = User.Claims;
-            var email = userClaims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress").Value;
+            var email = userClaims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")!.Value;
             var request = new GetTasksQuery() { Email = email };
 
+            var response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpGet("get/{taskId}")]
+        public async Task<IActionResult> GetTaskWithDetails([FromRoute] Guid taskId, CancellationToken cancellationToken)
+        {
+            var request = new GetTaskWithDetailsQuery() { TaskId = taskId };
             var response = await _mediator.Send(request, cancellationToken);
             return Ok(response);
         }
