@@ -17,6 +17,7 @@ import { ProjectListComponent } from './components/project-list/project-list.com
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { ProjectDialogComponent } from './components/project-dialog/project-dialog.component';
 import { ProjectViewComponent } from './components/project-view/project-view.component';
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ProjectViewComponent } from './components/project-view/project-view.com
     ProjectListComponent,
     TaskListComponent,
     ProjectDialogComponent,
-    ProjectViewComponent
+    ProjectViewComponent,
+    TaskDetailsComponent
   ],
   imports: [
     BrowserModule,

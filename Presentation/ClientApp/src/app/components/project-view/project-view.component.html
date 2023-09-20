@@ -1,4 +1,6 @@
 <div class="container">
+    <app-task-details class="task-details invisible" [id]="taskId" (isVisible)="hide()"></app-task-details>
+
     <div class="info">
         <h3 class="project-name">{{ project!.title }}</h3>
 
@@ -99,7 +101,7 @@
         </div>
 
         <div class="cards">
-            <div class="card" *ngFor="let task of tasks">
+            <div class="card" *ngFor="let task of tasks" (click)="viewTask(task.id)">
                 <div>
                     <h2>{{ task.title }}</h2>
                     <p class="task-number">Task #{{ this.project?.tasks!.indexOf(task) + 1 }}</p>

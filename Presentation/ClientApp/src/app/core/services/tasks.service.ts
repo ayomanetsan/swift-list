@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Task } from 'src/app/models/task';
+import { TaskWithDetails } from 'src/app/models/taskWithDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,10 @@ import { Task } from 'src/app/models/task';
 export class TasksService {
 
   constructor(private http: HttpService) { }
+
+  get(id: string) {
+    return this.http.get<TaskWithDetails>(`tasks/get/${id}`);
+  }
 
   getTasks() {
     return this.http.get<Task[]>('tasks');
@@ -19,5 +24,9 @@ export class TasksService {
 
   changeCompletion(id: string) {
     return this.http.put(`tasks/mark/?id=${id}`, { });
+  }
+
+  changeToDoItemCompletion(id: string) {
+    return this.http.put(`tasks/markToDoItem/?id=${id}`, { });
   }
 }

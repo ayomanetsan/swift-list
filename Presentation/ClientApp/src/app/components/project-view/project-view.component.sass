@@ -9,6 +9,19 @@
     // TODO: fix this
     margin: -54px -60px -60px -24px
 
+    .task-details
+        position: absolute
+        top: 0
+        left: 0
+        opacity: 1
+        z-index: 999
+        transition: 250ms ease-in
+        backdrop-filter: blur(5px)
+
+        &.invisible
+            z-index: -1
+            opacity: 0
+
     .info
         position: relative
         grid-area: info

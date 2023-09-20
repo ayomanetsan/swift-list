@@ -19,6 +19,7 @@ export class ProjectViewComponent implements OnInit {
   tasks: Task[] = [];
   baseUrl = '/dashboard/projects/';
   greeting: string = '';
+  taskId = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -83,6 +84,15 @@ export class ProjectViewComponent implements OnInit {
         this.tasks = this.project?.tasks?.filter(task => task.isCompleted) as Task[];
         break;
     }
+  }
+
+  viewTask(id: string) {
+    this.elementRef.nativeElement.querySelector('.task-details').classList.remove('invisible');
+    this.taskId = id;
+  }
+
+  hide() {
+    this.elementRef.nativeElement.querySelector('.task-details').classList.add('invisible');
   }
 
   changeCompletion(task: Task) {
