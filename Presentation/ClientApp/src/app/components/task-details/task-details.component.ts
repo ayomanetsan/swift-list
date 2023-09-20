@@ -17,6 +17,7 @@ export class TaskDetailsComponent {
   dueDate = '';
   creationDate = '';
   creator = '';
+  color = '';
 
   constructor(private taskService: TasksService) { }
 

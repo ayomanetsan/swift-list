@@ -18,6 +18,7 @@ import { TaskListComponent } from './components/task-list/task-list.component';
 import { ProjectDialogComponent } from './components/project-dialog/project-dialog.component';
 import { ProjectViewComponent } from './components/project-view/project-view.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { TaskDetailsComponent } from './components/task-details/task-details.com
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ColorPickerModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
