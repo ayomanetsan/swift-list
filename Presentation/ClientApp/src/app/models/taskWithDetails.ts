@@ -8,7 +8,8 @@ export interface TaskWithDetails extends Task {
     toDoItems: ToDoItem[] | undefined;
 }
 
-interface Label {
+export interface Label {
+    taskId: string;
     title: string;
     color: string;
 }

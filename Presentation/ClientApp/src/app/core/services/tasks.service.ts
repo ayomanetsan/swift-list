@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Task } from 'src/app/models/task';
-import { TaskWithDetails } from 'src/app/models/taskWithDetails';
+import { Label, TaskWithDetails } from 'src/app/models/taskWithDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,9 @@ export class TasksService {
 
   changeToDoItemCompletion(id: string) {
     return this.http.put(`tasks/markToDoItem/?id=${id}`, { });
+  }
+
+  createLabel(label: Label) {
+    return this.http.post('tasks/labels/create', label);
   }
 }

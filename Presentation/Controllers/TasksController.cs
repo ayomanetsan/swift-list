@@ -1,4 +1,5 @@
-﻿using Application.Tasks.Commands.ChangeTaskCompletion;
+﻿using Application.Labels.Commands.CreateLabel;
+using Application.Tasks.Commands.ChangeTaskCompletion;
 using Application.Tasks.Commands.CreateTask;
 using Application.Tasks.Queries.GetTasks;
 using Application.Tasks.Queries.GetTaskWithToDoItems;
@@ -58,6 +59,14 @@ namespace Presentation.Controllers
         public async Task<IActionResult> GetTaskWithDetails([FromRoute] Guid taskId, CancellationToken cancellationToken)
         {
             var request = new GetTaskWithDetailsQuery() { TaskId = taskId };
+            var response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpPost("labels/create")]
+        public async Task<IActionResult> CreateTaskLabel([FromBody] CreateLabelCommand request, CancellationToken cancellationToken)
+        {
             var response = await _mediator.Send(request, cancellationToken);
             return Ok(response);
         }
