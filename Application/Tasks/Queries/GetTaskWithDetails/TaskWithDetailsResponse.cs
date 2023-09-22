@@ -17,6 +17,8 @@ namespace Application.Tasks.Queries.GetTaskWithToDoItems
 
         public required string CreatedBy { get; set; }
 
+        public bool IsCompleted { get; set; }
+
         public IEnumerable<LabelResponse> Labels { get; set; } = null!;
 
         public IEnumerable<ToDoItemResponse> ToDoItems { get; set; } = null!;

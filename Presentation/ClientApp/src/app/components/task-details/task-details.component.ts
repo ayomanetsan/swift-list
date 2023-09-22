@@ -3,6 +3,7 @@ import { TasksService } from 'src/app/core/services/tasks.service';
 import { Label, TaskWithDetails, ToDoItem } from 'src/app/models/taskWithDetails';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { Task } from 'src/app/models/task';
 
 @Component({
   selector: 'app-task-details',
@@ -12,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class TaskDetailsComponent {
 
   @Input() id: string | undefined;
-  @Output() isVisible = new EventEmitter<boolean>();
+  @Output() isVisible = new EventEmitter<Task>();
   @ViewChild('label') inputLabel: ElementRef | null = null; 
 
   task: TaskWithDetails | undefined;
@@ -44,8 +45,7 @@ export class TaskDetailsComponent {
   }
 
   hide() { 
-    this.isVisible.emit(false);
-    this.id = undefined;
+    this.id = '';
     this.color = '';
     if (this.elementRef.nativeElement.querySelector('.to-do-item.temp > span').innerText.length >= 4) {
       const newToDoItem: ToDoItem = {
@@ -56,7 +56,17 @@ export class TaskDetailsComponent {
 
       this.task!.toDoItems!.push(newToDoItem);
     }
+    
+    this.task!.title = this.elementRef.nativeElement.querySelector('.title-input').innerText;
+    this.task!.description = this.elementRef.nativeElement.querySelector('.description-input').innerText;
+    const task: Task = {
+      id: this.task!.id!,
+      title: this.task!.title,
+      description: this.task!.description,
+      isCompleted: this.task!.isCompleted
+    };
 
+    this.isVisible.emit(task);
     this.taskService.update(this.task!).subscribe();
     this.elementRef.nativeElement.querySelector('.label.temp').classList.add('invisible');
     this.elementRef.nativeElement.querySelector('.label.add').classList.remove('invisible');
@@ -64,12 +74,32 @@ export class TaskDetailsComponent {
     this.inputLabel!.nativeElement.innerText = '';
     this.elementRef.nativeElement.querySelector('.to-do-item.temp > span').innerText = '';
     this.elementRef.nativeElement.querySelector('.to-do-item.temp > span[contenteditable]:empty::before').content = 'Type a task';
-    
   }
 
   showInputLabel() {
     this.elementRef.nativeElement.querySelector('.label.temp').classList.remove('invisible');
     this.elementRef.nativeElement.querySelector('.label.add').classList.add('invisible');
+  }
+
+  onTitleChanged(event: Event) {
+    if (event instanceof KeyboardEvent) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+      }
+
+      if (event.key !== 'Backspace' && (event.target as HTMLInputElement).innerText.length > 31) {
+        event.preventDefault();
+        this.toastr.error('Title cannot exceed 32 characters', 'Error');
+      }
+    }
+  }
+
+  onDescriptionChanged(event: Event) {
+    if (event instanceof KeyboardEvent) {
+      if ((event.target as HTMLInputElement).innerText.length < 4) {
+        this.toastr.error('Description must be at least 4 characters long', 'Error');
+      }
+    }
   }
 
   onKeyDown(event: Event) {

@@ -6,7 +6,7 @@
     <div class="details" *ngIf="task">
         <div class="content">
             <div class="title-n-date">
-                <h1>{{ task.title }}</h1>
+                <span class="title-input" role="textbox" contenteditable (keydown)="onTitleChanged($event)">{{ task.title }}</span>
                 <p><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2C17.52 2 22 6.48 22 12Z"
@@ -58,7 +58,7 @@
             </div>
 
             <div class="description">
-                <p>{{ task.description }}</p>
+                <span class="description-input" role="textbox" contenteditable (keydown)="onDescriptionChanged($event)">{{ task.description }}</span>
             </div>
 
             <div class="to-do-items">

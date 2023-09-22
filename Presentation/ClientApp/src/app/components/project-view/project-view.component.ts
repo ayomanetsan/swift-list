@@ -91,8 +91,9 @@ export class ProjectViewComponent implements OnInit {
     this.taskId = id;
   }
 
-  hide() {
+  hide(updatedTask: Task) {
     this.elementRef.nativeElement.querySelector('.task-details').classList.add('invisible');
+    this.tasks[this.tasks.findIndex(task => task.id == updatedTask.id)] = updatedTask;
   }
 
   changeCompletion(task: Task) {
