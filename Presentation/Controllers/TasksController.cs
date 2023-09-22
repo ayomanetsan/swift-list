@@ -1,6 +1,7 @@
 ﻿using Application.Labels.Commands.CreateLabel;
 using Application.Tasks.Commands.ChangeTaskCompletion;
 using Application.Tasks.Commands.CreateTask;
+using Application.Tasks.Commands.UpdateTask;
 using Application.Tasks.Queries.GetTasks;
 using Application.Tasks.Queries.GetTaskWithToDoItems;
 using Azure.Core;
@@ -66,6 +67,13 @@ namespace Presentation.Controllers
         [Authorize]
         [HttpPost("labels/create")]
         public async Task<IActionResult> CreateTaskLabel([FromBody] CreateLabelCommand request, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
+        }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateTask([FromBody] UpdateTaskCommand request, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(request, cancellationToken);
             return Ok(response);

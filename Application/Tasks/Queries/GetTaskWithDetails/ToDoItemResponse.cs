@@ -15,6 +15,7 @@ namespace Application.Tasks.Queries.GetTaskWithDetails
             public MappingProfile()
             {
                 CreateMap<Domain.Entities.ToDoItem, ToDoItemResponse>();
+                CreateMap<ToDoItemResponse, Domain.Entities.ToDoItem>();
             }
         }
     }

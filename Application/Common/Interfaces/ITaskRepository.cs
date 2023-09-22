@@ -9,5 +9,7 @@ namespace Application.Common.Interfaces
         Task<List<Task>> GetTasksByEmailAsync(string email, CancellationToken cancellationToken);
 
         Task<Task> GetTaskWithDetailsAsync(Guid taskId, CancellationToken cancellationToken);
+
+        Task<Guid> UpdateTaskWithDetailsAsync(Task task, CancellationToken cancellationToken);
     }
 }

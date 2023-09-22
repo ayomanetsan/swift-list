@@ -33,4 +33,8 @@ export class TasksService {
   createLabel(label: Label) {
     return this.http.post('tasks/labels/create', label);
   }
+
+  update(task: TaskWithDetails) {
+    return this.http.put('tasks/update', task);
+  }
 }

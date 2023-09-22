@@ -13,6 +13,7 @@ namespace Application.Tasks.Queries.GetTaskWithDetails
             public MappingProfile()
             {
                 CreateMap<Domain.Entities.Label, LabelResponse>();
+                CreateMap<LabelResponse, Domain.Entities.Label>();
             }
         }
     }

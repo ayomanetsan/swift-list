@@ -43,13 +43,28 @@ export class TaskDetailsComponent {
     }
   }
 
-  hide() {
+  hide() { 
     this.isVisible.emit(false);
     this.id = undefined;
     this.color = '';
+    if (this.elementRef.nativeElement.querySelector('.to-do-item.temp > span').innerText.length >= 4) {
+      const newToDoItem: ToDoItem = {
+        id: '00000000-0000-0000-0000-000000000000',
+        title: this.elementRef.nativeElement.querySelector('.to-do-item.temp').innerText,
+        isCompleted: false
+      }
+
+      this.task!.toDoItems!.push(newToDoItem);
+    }
+
+    this.taskService.update(this.task!).subscribe();
     this.elementRef.nativeElement.querySelector('.label.temp').classList.add('invisible');
     this.elementRef.nativeElement.querySelector('.label.add').classList.remove('invisible');
+    this.elementRef.nativeElement.querySelector('.to-do-item.temp').classList.add('invisible');
     this.inputLabel!.nativeElement.innerText = '';
+    this.elementRef.nativeElement.querySelector('.to-do-item.temp > span').innerText = '';
+    this.elementRef.nativeElement.querySelector('.to-do-item.temp > span[contenteditable]:empty::before').content = 'Type a task';
+    
   }
 
   showInputLabel() {
@@ -85,7 +100,6 @@ export class TaskDetailsComponent {
     }
 
     this.task!.labels!.push(newLabel);
-    this.taskService.createLabel(newLabel).subscribe();
 
     this.elementRef.nativeElement.querySelector('.label.temp').classList.add('invisible');
     this.elementRef.nativeElement.querySelector('.label.add').classList.remove('invisible');
@@ -110,5 +124,26 @@ export class TaskDetailsComponent {
 
   changeCompletion(toDoItem: ToDoItem) {
     toDoItem.isCompleted = !toDoItem.isCompleted;
+  }
+
+  showToDoItemInput() {
+    if (this.elementRef.nativeElement.querySelector('.to-do-item.temp').classList.contains('invisible')) {
+      this.elementRef.nativeElement.querySelector('.to-do-item.temp').classList.remove('invisible');
+      return;
+    }
+    
+    if (this.elementRef.nativeElement.querySelector('.to-do-item.temp > span').innerText.length >= 4) {
+      const newToDoItem: ToDoItem = {
+        id: '00000000-0000-0000-0000-000000000000',
+        title: this.elementRef.nativeElement.querySelector('.to-do-item.temp').innerText,
+        isCompleted: false
+      }
+
+      this.task!.toDoItems!.push(newToDoItem);
+      this.elementRef.nativeElement.querySelector('.to-do-item.temp > span').innerText = '';
+      this.elementRef.nativeElement.querySelector('.to-do-item.temp > span[contenteditable]:empty::before').content = 'Type a task';
+    } else {
+      this.toastr.error('To Do Item must be at least 4 characters long', 'Error');
+    }
   }
 }
