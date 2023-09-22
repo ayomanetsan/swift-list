@@ -2,7 +2,7 @@
     <app-task-details class="task-details invisible" [id]="taskId" (isVisible)="hide($event)"></app-task-details>
 
     <div class="info">
-        <h3 class="project-name">{{ project!.title }}</h3>
+        <h1 class="project-name">{{ project!.title }}</h1>
 
         <div class="tabs">
             <a class="tab" routerLink="{{baseUrl}}/tasks/{{id}}" routerLinkActive="active"><svg viewBox="0 0 24 24"
