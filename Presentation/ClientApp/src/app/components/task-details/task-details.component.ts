@@ -4,6 +4,7 @@ import { Label, TaskWithDetails, ToDoItem } from 'src/app/models/taskWithDetails
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Task } from 'src/app/models/task';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-task-details',
@@ -13,6 +14,7 @@ import { Task } from 'src/app/models/task';
 export class TaskDetailsComponent {
 
   @Input() id: string | undefined;
+  @Input() projectId: string | undefined;
   @Output() isVisible = new EventEmitter<Task>();
   @ViewChild('label') inputLabel: ElementRef | null = null; 
 
@@ -29,6 +31,26 @@ export class TaskDetailsComponent {
     ) { }
 
   ngOnChanges() {
+    if (this.id == '00000000-0000-0000-0000-000000000000') {
+      this.task = {
+        id: '00000000-0000-0000-0000-000000000000',
+        title: '',
+        description: '',
+        isCompleted: false,
+        createdAt: new Date(),
+        createdBy: '',
+        dueDate: new Date(),
+        labels: [],
+        toDoItems: [],
+        projectId: this.projectId
+      }
+
+      this.dueDate = 'No due date';
+      this.creationDate = moment(this.task.createdAt).format('Do MMMM YYYY');
+      this.creator = 'You';
+      return;
+    }
+
     if (this.id) {
       this.taskService.get(this.id).subscribe(res => {
         this.task = res;
@@ -45,7 +67,6 @@ export class TaskDetailsComponent {
   }
 
   hide() { 
-    this.id = '';
     this.color = '';
     if (this.elementRef.nativeElement.querySelector('.to-do-item.temp > span').innerText.length >= 4) {
       const newToDoItem: ToDoItem = {
@@ -59,6 +80,7 @@ export class TaskDetailsComponent {
     
     this.task!.title = this.elementRef.nativeElement.querySelector('.title-input').innerText;
     this.task!.description = this.elementRef.nativeElement.querySelector('.description-input').innerText;
+
     const task: Task = {
       id: this.task!.id!,
       title: this.task!.title,
@@ -66,8 +88,20 @@ export class TaskDetailsComponent {
       isCompleted: this.task!.isCompleted
     };
 
+    if (this.task!.id == '00000000-0000-0000-0000-000000000000') {
+      this.taskService.create(this.task!).subscribe(
+        (res: string) => {
+          task.id = res;
+        }
+      );
+    } else {
+      this.taskService.update(this.task!).subscribe();
+    }
+
+    
+
     this.isVisible.emit(task);
-    this.taskService.update(this.task!).subscribe();
+      
     this.elementRef.nativeElement.querySelector('.label.temp').classList.add('invisible');
     this.elementRef.nativeElement.querySelector('.label.add').classList.remove('invisible');
     this.elementRef.nativeElement.querySelector('.to-do-item.temp').classList.add('invisible');
@@ -174,6 +208,14 @@ export class TaskDetailsComponent {
       this.elementRef.nativeElement.querySelector('.to-do-item.temp > span[contenteditable]:empty::before').content = 'Type a task';
     } else {
       this.toastr.error('To Do Item must be at least 4 characters long', 'Error');
+    }
+  }
+
+  onDateChanged(event: MatDatepickerInputEvent<any>): void {
+    this.dueDate = moment(event.value).calendar();
+
+    if (this.dueDate.includes('/')) {
+      this.dueDate = moment(event.value).format('D MMM');
     }
   }
 }

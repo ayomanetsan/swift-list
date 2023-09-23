@@ -7,6 +7,7 @@ export interface TaskWithDetails extends Task {
     labels: Label[] | undefined;
     toDoItems: ToDoItem[] | undefined;
     isCompleted: boolean;
+    projectId?: string;
 }
 
 export interface Label {

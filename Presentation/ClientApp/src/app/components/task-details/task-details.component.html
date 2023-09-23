@@ -6,14 +6,20 @@
     <div class="details" *ngIf="task">
         <div class="content">
             <div class="title-n-date">
-                <span class="title-input" role="textbox" contenteditable (keydown)="onTitleChanged($event)">{{ task.title }}</span>
-                <p><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <span class="title-input" role="textbox" contenteditable (keydown)="onTitleChanged($event)">{{
+                    task.title }}</span>
+
+                <p (click)="picker.open()"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2C17.52 2 22 6.48 22 12Z"
                             stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         <path d="M15.71 15.18L12.61 13.33C12.07 13.01 11.63 12.24 11.63 11.61V7.51001" stroke="#292D32"
                             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>{{ dueDate }}</p>
+
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date"
+                    (dateInput)="onDateChanged($event)">
+                <mat-datepicker #picker></mat-datepicker>
             </div>
 
             <div class="labels">
@@ -27,8 +33,9 @@
                         (keydown)="onKeyDown($event)"></span>
 
                     <svg [(colorPicker)]="color" [cpAlphaChannel]="'disabled'" [cpEyeDropper]="true" [cpOKButton]="true"
-                        [cpOKButtonText]="'Save'" [cpSaveClickOutside]="false" [cpOutputFormat]="'hex'" (colorPickerSelect)="onColorSelect()"
-                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        [cpOKButtonText]="'Save'" [cpSaveClickOutside]="false" [cpOutputFormat]="'hex'"
+                        (colorPickerSelect)="onColorSelect()" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M3.77 15.56L7.23 19.02C9.66 21.45 10.49 21.41 12.89 19.02L18.46 13.45C20.4 11.51 20.89 10.22 18.46 7.78996L15 4.32996C12.41 1.73996 11.28 2.38996 9.34 4.32996L3.77 9.89996C1.38 12.3 1.18 12.97 3.77 15.56Z"
                             [style.stroke]="calculateContrast(color)" stroke-width="1.5" stroke-linecap="round"
@@ -58,7 +65,8 @@
             </div>
 
             <div class="description">
-                <span class="description-input" role="textbox" contenteditable (keydown)="onDescriptionChanged($event)">{{ task.description }}</span>
+                <span class="description-input" role="textbox" contenteditable
+                    (keydown)="onDescriptionChanged($event)">{{ task.description }}</span>
             </div>
 
             <div class="to-do-items">

@@ -93,12 +93,21 @@ export class ProjectViewComponent implements OnInit {
 
   hide(updatedTask: Task) {
     this.elementRef.nativeElement.querySelector('.task-details').classList.add('invisible');
-    this.tasks[this.tasks.findIndex(task => task.id == updatedTask.id)] = updatedTask;
+    if (this.tasks[this.tasks.findIndex(task => task.id == updatedTask.id)]) {
+      this.tasks[this.tasks.findIndex(task => task.id == updatedTask.id)] = updatedTask;
+    } else {
+      this.tasks.push(updatedTask);
+    }
   }
 
   changeCompletion(task: Task) {
     this.tasksService.changeCompletion(task.id).subscribe();
     task.isCompleted = !task.isCompleted;
     this.applySorting(this.elementRef.nativeElement.querySelector('.sorting > div.active').className.split(' ')[0]);
+  }
+
+  openTaskCreation() {
+    this.elementRef.nativeElement.querySelector('.task-details').classList.remove('invisible');
+    this.taskId = '00000000-0000-0000-0000-000000000000';
   }
 }
