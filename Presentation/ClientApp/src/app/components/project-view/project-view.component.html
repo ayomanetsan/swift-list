@@ -1,6 +1,8 @@
 <div class="container">
+    <app-task-details class="task-details invisible" [taskId]="taskId" [projectId]="this.project!.id" (updatedTask)="updateTasks($event)"></app-task-details>
+
     <div class="info">
-        <h3 class="project-name">{{ project!.title }}</h3>
+        <h1 class="project-name">{{ project!.title }}</h1>
 
         <div class="tabs">
             <a class="tab" routerLink="{{baseUrl}}/tasks/{{id}}" routerLinkActive="active"><svg viewBox="0 0 24 24"
@@ -84,7 +86,7 @@
         <div class="header">
             <h1 class="greeting">Welcome back, {{ greeting }}!</h1>
 
-            <button (click)="openDialog()"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button (click)="openTaskCreation()"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6 12H18" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     </path>
                     <path d="M12 18V6" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -99,7 +101,7 @@
         </div>
 
         <div class="cards">
-            <div class="card" *ngFor="let task of tasks">
+            <div class="card" *ngFor="let task of tasks" (click)="viewTask(task.id)">
                 <div>
                     <h2>{{ task.title }}</h2>
                     <p class="task-number">Task #{{ this.project?.tasks!.indexOf(task) + 1 }}</p>

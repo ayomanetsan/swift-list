@@ -9,6 +9,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './components/main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -17,6 +18,9 @@ import { ProjectListComponent } from './components/project-list/project-list.com
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { ProjectDialogComponent } from './components/project-dialog/project-dialog.component';
 import { ProjectViewComponent } from './components/project-view/project-view.component';
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -29,15 +33,19 @@ import { ProjectViewComponent } from './components/project-view/project-view.com
     ProjectListComponent,
     TaskListComponent,
     ProjectDialogComponent,
-    ProjectViewComponent
+    ProjectViewComponent,
+    TaskDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ColorPickerModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatDatepickerModule,
     MatDialogModule,
+    MatNativeDateModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       preventDuplicates: true,

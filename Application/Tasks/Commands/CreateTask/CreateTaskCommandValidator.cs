@@ -13,7 +13,7 @@ namespace Application.Tasks.Commands.CreateTask
 
             RuleFor(x => x.Description)
                 .NotEmpty().WithMessage("Description is required.")
-                .MinimumLength(8).WithMessage("Description must be at least 4 characters long.");
+                .MinimumLength(8).WithMessage("Description must be at least 8 characters long.");
         }
     }
 }

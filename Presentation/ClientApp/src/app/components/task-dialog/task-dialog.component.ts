@@ -34,15 +34,5 @@ export class TaskDialogComponent {
   }
 
   onSubmit() {
-    if (this.createForm.valid) {
-      this.tasksService.createTask(
-        this.createForm.value.title,
-        this.createForm.value.description,
-        this.data.projectId
-      ).subscribe(() => {
-        this.dialogRef.close();
-        this.toastr.success('Task created successfully!', 'Success!');
-      });
-    }
   }
 }
