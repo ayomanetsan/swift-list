@@ -1,23 +1,17 @@
-﻿{
-  "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:28116",
-      "sslPort": 44306
-    }
-  },
+{
   "profiles": {
     "https": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": false,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:8080;http://localhost:5050",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "JWT_ISSUER": "SwiftList",
+        "JWT_AUDIENCE": "SwiftList",
+        "JWT_SECRET": "FL+YRoOYm5LDdCgxBJCa9ci1PP+IOjhYPZ88kSalHVX6SjsvfpiWuZG3Adb3cXNfNFc81hivTPYFExM5q1CetAGHDhRdd2Eg49r1oUfDmOparwPcxyHVm0QDpz7TToZ30iTxjVbYtjWzK/j2IK/Yq9LwmDLmzFSj0KWcAXzkpgySOth4XeiaUKSsa8wXInNj",
+        "DB_CONN": "Server=tcp:swift-list.database.windows.net,1433;Initial Catalog=SwiftList;Persist Security Info=False;User ID=swifter;Password=personaDb123!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:8080;http://localhost:5050"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -26,6 +20,15 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:28116",
+      "sslPort": 44306
     }
   }
 }
