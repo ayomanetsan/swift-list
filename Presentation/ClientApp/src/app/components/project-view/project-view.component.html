@@ -1,5 +1,5 @@
 <div class="container">
-    <app-task-details class="task-details invisible" [id]="taskId" [projectId]="this.project?.id" (isVisible)="hide($event)"></app-task-details>
+    <app-task-details class="task-details invisible" [taskId]="taskId" [projectId]="this.project!.id" (updatedTask)="updateTasks($event)"></app-task-details>
 
     <div class="info">
         <h1 class="project-name">{{ project!.title }}</h1>

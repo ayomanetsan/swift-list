@@ -21,3 +21,16 @@ export interface ToDoItem {
     title: string;
     isCompleted: boolean;
 }
+
+export const EmptyTask: TaskWithDetails = {
+    id: '00000000-0000-0000-0000-000000000000',
+    title: '',
+    description: '',
+    isCompleted: false,
+    createdAt: new Date(),
+    createdBy: '',
+    dueDate: new Date(),
+    labels: [],
+    toDoItems: [],
+    projectId: ''
+}

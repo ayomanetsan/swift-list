@@ -89,9 +89,10 @@ export class ProjectViewComponent implements OnInit {
   viewTask(id: string) {
     this.elementRef.nativeElement.querySelector('.task-details').classList.remove('invisible');
     this.taskId = id;
+    console.log(this.taskId);
   }
 
-  hide(updatedTask: Task) {
+  updateTasks(updatedTask: Task) {
     this.elementRef.nativeElement.querySelector('.task-details').classList.add('invisible');
     if (this.tasks[this.tasks.findIndex(task => task.id == updatedTask.id)]) {
       this.tasks[this.tasks.findIndex(task => task.id == updatedTask.id)] = updatedTask;
