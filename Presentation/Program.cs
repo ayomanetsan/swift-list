@@ -34,6 +34,15 @@ builder.Services.AddCors(options =>
                    .AllowAnyMethod()
                    .AllowAnyHeader();
         });
+
+    options.AddPolicy("HostPolicy",
+        builder =>
+        {
+            builder.WithOrigins("https://swift-list-mu.vercel.app")
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+        });
 });
 
 var app = builder.Build();
