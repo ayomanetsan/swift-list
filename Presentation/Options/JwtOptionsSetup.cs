@@ -5,16 +5,11 @@ namespace Presentation.Options
 {
     public class JwtOptionsSetup : IConfigureOptions<JwtOptions>
     {
-        private readonly IConfiguration _configuration;
-
-        public JwtOptionsSetup(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public void Configure(JwtOptions options)
         {
-            _configuration.GetSection("Jwt").Bind(options);
+            options.Issuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
+            options.Audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+            options.SecretKey = Environment.GetEnvironmentVariable("JWT_SECRET");
         }
     }
 }

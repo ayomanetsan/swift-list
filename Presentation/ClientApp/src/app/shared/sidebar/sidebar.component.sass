@@ -1,0 +1,68 @@
+@import 'src/styles.sass'
+
+.logo
+    margin-bottom: 32px
+    font-size: 24px
+    font-family: 'Bricolage Grotesque', sans-serif
+
+.tabs
+    display: flex
+    flex-direction: column
+    gap: 8px
+
+    .tab
+        display: flex
+        align-items: center
+        gap: 16px
+        padding: 12px 8px
+        border-radius: 8px
+
+        font-family: 'Bricolage Grotesque', sans-serif
+        font-size: 16px
+        font-weight: 600
+        text-decoration: none
+
+        &:hover
+            background-color: $secondary-color
+            opacity: 0.8
+
+        &.active
+            background-color: $secondary-color
+
+        svg
+            height: 20px
+
+.user
+    position: absolute
+    bottom: 36px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    width: calc( 100% -  60px)
+
+    .details
+        display: flex
+        align-items: center
+        gap: 12px
+
+        svg
+            height: 40px
+
+        .name
+            font-size: 14px
+            font-weight: 600
+
+        .email
+            font-size: 12px
+            opacity: 0.7
+
+    svg
+        height: 24px
+        opacity: 0.7
+        transition: 0.3s
+        cursor: pointer
+        
+        &:hover
+            fill: $accent-color
+            opacity: 1
+            transition: 0.3s

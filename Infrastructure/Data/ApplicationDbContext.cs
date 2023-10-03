@@ -10,7 +10,10 @@ namespace Infrastructure.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Label> Labels { get; set; }
+        public DbSet<ToDoItem> ToDoItems { get; set; }
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<Project> Projects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

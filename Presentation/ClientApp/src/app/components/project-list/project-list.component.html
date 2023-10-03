@@ -1,0 +1,27 @@
+<div class="header">
+    <h1 class="greeting">Welcome back, {{ greeting }}!</h1>
+
+    <button (click)="openDialog()"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 12H18" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        </path>
+        <path d="M12 18V6" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        </path>
+    </svg>New Project</button>
+</div>
+
+<div class="cards">
+    <div class="card" *ngFor="let project of projects">
+        <div>
+            <h2>{{ project.title }}</h2>
+            <p>{{ project.description }}</p>
+        </div>
+
+        <div>
+            <div class="line"></div>
+
+            <button (click)="viewProject(project.id)">
+                <h4>View</h4>
+            </button>
+        </div>
+    </div>
+</div>
