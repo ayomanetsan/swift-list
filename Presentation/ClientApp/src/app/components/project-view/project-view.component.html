@@ -1,8 +1,8 @@
 <div class="container">
-    <app-task-details class="task-details invisible" [taskId]="taskId" [projectId]="this.project!.id" (updatedTask)="updateTasks($event)"></app-task-details>
+    <app-task-details class="task-details invisible" [taskId]="taskId" [projectId]="this.id" (updatedTask)="updateTasks($event)"></app-task-details>
 
     <div class="info">
-        <h1 class="project-name">{{ project!.title }}</h1>
+        <h1 class="project-name">{{ project?.title }}</h1>
 
         <div class="tabs">
             <a class="tab" routerLink="{{baseUrl}}/tasks/{{id}}" routerLinkActive="active"><svg viewBox="0 0 24 24"
