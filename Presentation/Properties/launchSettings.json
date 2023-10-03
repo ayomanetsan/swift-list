@@ -5,10 +5,10 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DB_CONN": "Server=tcp:swift-list.database.windows.net,1433;Initial Catalog=SwiftList;Persist Security Info=False;User ID=swifter;Password=personaDb123!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
-        "JWT_AUDIENCE": "SwiftList",
-        "JWT_ISSUER": "SwiftList",
-        "JWT_SECRET": "FL+YRoOYm5LDdCgxBJCa9ci1PP+IOjhYPZ88kSalHVX6SjsvfpiWuZG3Adb3cXNfNFc81hivTPYFExM5q1CetAGHDhRdd2Eg49r1oUfDmOparwPcxyHVm0QDpz7TToZ30iTxjVbYtjWzK/j2IK/Yq9LwmDLmzFSj0KWcAXzkpgySOth4XeiaUKSsa8wXInNj"
+        "JWT_ISSUER": "dev",
+        "JWT_AUDIENCE": "dev",
+        "JWT_SECRET": "EuFneGu1dHMb43S1fvOtWwz9EdavN+mkBvoOpZOqLhkjWQH+nA4Ic5J0Qjr15k4Pe1YM5bOPRzaySYCAjxNtUTftvW3gqadkzKM5IvfZr706Vkr7B74dm1WspDwBqOIa/aj+hh1yaGyZv41nIudZBb6Av819Afr6gwRbywDYsps=",
+        "DB_CONN": "Server=localhost;Database=SwiftList;Trusted_Connection=True;TrustServerCertificate=True;"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:8080;http://localhost:5050"
@@ -26,6 +26,15 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "publishAllPorts": true,
       "useSSL": true
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:28116",
+      "sslPort": 44306
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",
