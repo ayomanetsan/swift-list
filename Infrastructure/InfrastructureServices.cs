@@ -15,7 +15,7 @@ namespace Infrastructure
         {
             var connectionString = Environment.GetEnvironmentVariable("DB_CONN");
 
-            services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(connectionString));
+            services.AddDbContext<ApplicationDbContext>(opt => opt.UseNpgsql(connectionString));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
