@@ -14,6 +14,7 @@ namespace Infrastructure.Data
         public DbSet<ToDoItem> ToDoItems { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<ProjectUsers> ProjectUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

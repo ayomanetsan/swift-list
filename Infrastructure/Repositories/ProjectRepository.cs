@@ -1,5 +1,7 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
+using Domain.Enums;
+using Domain.Exceptions;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,12 +21,67 @@ namespace Infrastructure.Repositories
                 .ToListAsync(cancellationToken);
         }
 
-        public Task<Project> GetProjectWithTasksAsync(Guid projectId, CancellationToken cancellationToken)
+        public async Task<Project> GetProjectWithTasksAsync(Guid projectId, CancellationToken cancellationToken)
         {
-            return _context.Projects
-                .Include(x => x.Tasks)
+            var project = await _context.Projects
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Id == projectId, cancellationToken)!;
+                .Include(x => x.Tasks)
+                .FirstOrDefaultAsync(x => x.Id == projectId, cancellationToken);
+
+            if (project is null)
+            {
+                throw new ProjectNotFoundException(projectId);
+            }
+
+            return project;
+        }
+
+        public async Task<AccessRights> GetAccessRightsAsync(Guid projectId, string email, CancellationToken cancellationToken)
+        {
+            var projectUser = await _context.ProjectUsers
+                .AsNoTracking()
+                .Include(x => x.User)
+                .FirstOrDefaultAsync(x => x.ProjectId == projectId && x.User.Email == email, cancellationToken);
+
+            if (projectUser is null)
+            {
+                throw new ProjectNotFoundException(projectId);
+            }
+            
+            return projectUser.AccessRights;
+        }
+
+        public async Task<AccessRights> GrantAccessRightsAsync(Guid projectId, string email, AccessRights accessRights,
+            CancellationToken cancellationToken)
+        {
+            var user = await _context.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
+
+            if (user is null)
+            {
+                throw new UserNotFoundException(email);
+            }
+            
+            var projectUser = await _context.ProjectUsers
+                .Include(x => x.User)
+                .FirstOrDefaultAsync(x => x.ProjectId == projectId && x.User.Email == email, cancellationToken);
+
+            if (projectUser is null)
+            {
+                var newProjectUser = new ProjectUsers()
+                {
+                    UserId = user.Id,
+                    ProjectId = projectId,
+                    AccessRights = accessRights
+                };
+
+                await _context.ProjectUsers.AddAsync(newProjectUser, cancellationToken);
+                return newProjectUser.AccessRights;
+            }
+
+            projectUser.AccessRights = accessRights;
+            return projectUser.AccessRights;
         }
     }
 }

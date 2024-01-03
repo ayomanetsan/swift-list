@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; }
 
-        public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset CreatedAt { get; set; } = DateTime.UtcNow;
 
         public string? CreatedBy { get; set; }
     }
