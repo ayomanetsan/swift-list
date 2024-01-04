@@ -15,7 +15,7 @@ namespace Infrastructure
         {
             var connectionString = "Server=localhost;Database=SwiftList;Trusted_Connection=True;TrustServerCertificate=True;";
 
-            services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(connectionString));
+            services.AddDbContext<ApplicationDbContext>(opt => opt.UseNpgsql(connectionString));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
