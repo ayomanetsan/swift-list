@@ -68,4 +68,6 @@ app.UseIpRateLimiting();
 
 app.MapControllers();
 
+app.UseCoreContext();
+
 app.Run();

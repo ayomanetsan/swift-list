@@ -2,11 +2,7 @@
 using Domain.Exceptions;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
-using System.Text.Json;
 using Task = Domain.Entities.Task;
-using Azure.Core;
-using System.Linq;
 
 namespace Infrastructure.Repositories
 {
