@@ -4,7 +4,6 @@ using Application.Tasks.Commands.CreateTask;
 using Application.Tasks.Commands.UpdateTask;
 using Application.Tasks.Queries.GetTasks;
 using Application.Tasks.Queries.GetTaskWithToDoItems;
-using Azure.Core;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
