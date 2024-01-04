@@ -13,7 +13,7 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = Environment.GetEnvironmentVariable("DB_CONN");
+            var connectionString = "Server=localhost;Database=SwiftList;Trusted_Connection=True;TrustServerCertificate=True;";
 
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(connectionString));
 
