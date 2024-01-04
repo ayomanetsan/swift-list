@@ -8,7 +8,7 @@
         "JWT_ISSUER": "dev",
         "JWT_AUDIENCE": "dev",
         "JWT_SECRET": "EuFneGu1dHMb43S1fvOtWwz9EdavN+mkBvoOpZOqLhkjWQH+nA4Ic5J0Qjr15k4Pe1YM5bOPRzaySYCAjxNtUTftvW3gqadkzKM5IvfZr706Vkr7B74dm1WspDwBqOIa/aj+hh1yaGyZv41nIudZBb6Av819Afr6gwRbywDYsps=",
-        "DB_CONN": "Server=localhost;Database=SwiftList;Trusted_Connection=True;TrustServerCertificate=True;"
+        "DB_CONN": "Host=localhost;Port=5432;Database=SwiftList;Username=postgres;Password=metz1703A"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:8080;http://localhost:5050"

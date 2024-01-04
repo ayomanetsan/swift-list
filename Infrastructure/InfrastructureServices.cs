@@ -3,6 +3,7 @@ using AspNetCoreRateLimit;
 using Infrastructure.Data;
 using Infrastructure.Identity;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,9 +14,9 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = "Server=localhost;Database=SwiftList;Trusted_Connection=True;TrustServerCertificate=True;";
+            var connectionString = Environment.GetEnvironmentVariable("DB_CONN");
 
-            services.AddDbContext<ApplicationDbContext>(opt => opt.UseNpgsql(connectionString));
+            services.AddDbContext<ApplicationDbContext>(opt => opt.UseNpgsql(connectionString, opt => opt.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.GetName().Name)) );
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -40,6 +41,13 @@ namespace Infrastructure
             services.AddInMemoryRateLimiting();
 
             return services;
+        }
+
+        public static void UseCoreContext(this IApplicationBuilder app)
+        {
+            using var scope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
+            using var context = scope?.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            context?.Database.Migrate();
         }
     }
 }
