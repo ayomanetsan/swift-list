@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { TasksService } from 'src/app/core/services/tasks.service';
-import { Project } from 'src/app/models/project';
+import { AccessRights, Project } from 'src/app/models/project';
 import { Task } from 'src/app/models/task';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
+import { ProjectAccessComponent } from '../project-access/project-access.component';
 
 @Component({
   selector: 'app-project-view',
@@ -24,6 +25,7 @@ export class ProjectViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
+    private router: Router,
     private tasksService: TasksService,
     private dialogRef: MatDialog,
     private elementRef: ElementRef
@@ -38,6 +40,9 @@ export class ProjectViewComponent implements OnInit {
       (res: Project | null) => {
         this.project = res;
         this.tasks = res?.tasks as Task[];
+      },
+      err => {
+        this.router.navigate(['/page-not-found']);
       });
 
     this.greeting = localStorage.getItem('userName')?.split(' ')[0] as string;
@@ -110,5 +115,18 @@ export class ProjectViewComponent implements OnInit {
   openTaskCreation() {
     this.elementRef.nativeElement.querySelector('.task-details').classList.remove('invisible');
     this.taskId = '00000000-0000-0000-0000-000000000000';
+  }
+
+  openAccessManagement() {
+    this.dialogRef.open(ProjectAccessComponent, {
+      data: {
+        title: this.project?.title,
+        projectId: this.id
+      }
+    });
+  }
+
+  public get accessRights(): typeof AccessRights {
+    return AccessRights;
   }
 }

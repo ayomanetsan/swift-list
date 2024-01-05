@@ -1,0 +1,52 @@
+@import 'src/styles.sass'
+
+.container
+    display: flex
+    flex-direction: column
+    padding: 24px
+
+    h1
+      font-family: "Bricolage Grotesque", sans-serif
+      font-weight: 600
+
+    form
+      display: flex
+      flex-direction: column
+      margin-top: 16px
+
+      input
+        width: 400px
+        padding: 8px 16px
+        border-radius: 5px
+        border: 2px solid $secondary-color
+        outline: none
+        font-size: 1rem
+
+      button
+        margin-top: 16px
+        padding: 8px 16px
+        border-radius: 5px
+        border: 2px solid $secondary-color
+        background: $accent-color
+        outline: none
+        color: $primary-color
+        font-family: 'Bricolage Grotesque', sans-serif
+        font-size: 16px
+        transition: 0.3s
+        cursor: pointer
+
+        &:hover
+          opacity: .9
+          transition: .3s
+
+    .users
+      display: flex
+      flex-direction: column
+      margin-top: 16px
+
+      .user
+        display: flex
+        justify-content: space-between
+
+        mat-form-field
+          width: 120px

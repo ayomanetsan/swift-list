@@ -28,7 +28,7 @@ namespace Application.Tasks.Commands.CreateTask
 
         public async Task<Guid> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
-            Project project = await _projectRepository.GetAsync(request.ProjectId, cancellationToken);
+            Project? project = await _projectRepository.GetAsync(request.ProjectId, cancellationToken);
 
             if (project is null)
             {

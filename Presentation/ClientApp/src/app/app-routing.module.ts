@@ -7,6 +7,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { ProjectListComponent } from './components/project-list/project-list.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { ProjectViewComponent } from './components/project-view/project-view.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'projects/tasks/:id', component: ProjectViewComponent },
     ],
   },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

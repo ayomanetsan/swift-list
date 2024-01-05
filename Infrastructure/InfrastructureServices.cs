@@ -15,6 +15,7 @@ namespace Infrastructure
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = Environment.GetEnvironmentVariable("DB_CONN");
+            //var connectionString = "Host=localhost;Port=5432;Database=SwiftList;Username=postgres;Password=admin";
 
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseNpgsql(connectionString, opt => opt.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.GetName().Name)) );
 
