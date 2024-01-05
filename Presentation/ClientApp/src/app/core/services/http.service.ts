@@ -45,5 +45,5 @@ export class HttpService {
       return { headers };
     }
     return {};
-  }  
+  }
 }

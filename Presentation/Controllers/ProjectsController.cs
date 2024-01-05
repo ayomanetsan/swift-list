@@ -1,5 +1,6 @@
 ﻿using Application.Projects.Commands.CreateProject;
 using Application.Projects.Commands.GrantAccessRights;
+using Application.Projects.Queries.GetProjectAccessRights;
 using Application.Projects.Queries.GetProjectsWithoutTasks;
 using Application.Projects.Queries.GetProjectWithTasks;
 using MediatR;
@@ -59,6 +60,15 @@ namespace Presentation.Controllers
             CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpGet("{projectId}/access-rights")]
+        public async Task<IActionResult> GetProjectAccessRights(Guid projectId, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new GetProjectAccessRightsQuery() { ProjectId = projectId },
+                cancellationToken);
             return Ok(response);
         }
     }

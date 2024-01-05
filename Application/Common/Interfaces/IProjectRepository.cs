@@ -13,4 +13,6 @@ public interface IProjectRepository : IRepository<Project>
 
     Task<AccessRights> GrantAccessRightsAsync(Guid projectId, string email, AccessRights accessRights,
         CancellationToken cancellationToken);
+
+    Task<IEnumerable<ProjectUsers>> GetProjectAccessRightsAsync(Guid projectId, CancellationToken cancellationToken);
 }

@@ -83,5 +83,21 @@ namespace Infrastructure.Repositories
             projectUser.AccessRights = accessRights;
             return projectUser.AccessRights;
         }
+
+        public async Task<IEnumerable<ProjectUsers>> GetProjectAccessRightsAsync(Guid projectId, CancellationToken cancellationToken)
+        {
+            var projectUsers = await _context.ProjectUsers
+                .AsNoTracking()
+                .Include(x => x.User)
+                .Where(x => x.ProjectId == projectId)
+                .ToListAsync(cancellationToken);
+
+            if (projectUsers is null)
+            {
+                throw new ProjectNotFoundException(projectId);
+            }
+
+            return projectUsers;
+        }
     }
 }
