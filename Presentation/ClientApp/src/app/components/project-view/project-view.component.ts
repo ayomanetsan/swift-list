@@ -80,13 +80,13 @@ export class ProjectViewComponent implements OnInit {
   applySorting(sorting: string) {
     switch (sorting) {
       case 'all':
-        this.tasks = this.project?.tasks as Task[];
+        this.tasks = this.project?.tasks?.filter(task => !task.isArchived) as Task[];
         break;
       case 'in-progress':
-        this.tasks = this.project?.tasks?.filter(task => !task.isCompleted) as Task[];
+        this.tasks = this.project?.tasks?.filter(task => !task.isCompleted && !task.isArchived) as Task[];
         break;
       case 'completed':
-        this.tasks = this.project?.tasks?.filter(task => task.isCompleted) as Task[];
+        this.tasks = this.project?.tasks?.filter(task => task.isCompleted && !task.isArchived) as Task[];
         break;
     }
   }
@@ -109,6 +109,12 @@ export class ProjectViewComponent implements OnInit {
   changeCompletion(task: Task) {
     this.tasksService.changeCompletion(task.id).subscribe();
     task.isCompleted = !task.isCompleted;
+    this.applySorting(this.elementRef.nativeElement.querySelector('.sorting > div.active').className.split(' ')[0]);
+  }
+
+  changeArchivation(task: Task) {
+    this.tasksService.changeArchivation(task.id).subscribe();
+    task.isArchived = !task.isArchived;
     this.applySorting(this.elementRef.nativeElement.querySelector('.sorting > div.active').className.split(' ')[0]);
   }
 

@@ -1,6 +1,5 @@
 <div class="container" *ngIf="project">
-  <app-task-details class="task-details invisible" [taskId]="taskId" [projectId]="this.id"
-    (updatedTask)="updateTasks($event)"></app-task-details>
+  <app-task-details class="task-details invisible" [taskId]="taskId" [projectId]="this.id"></app-task-details>
 
   <div class="info">
     <h1 class="project-name">{{ project.title }}</h1>
@@ -85,39 +84,10 @@
   <div class="tasks">
     <div class="header">
       <h1 class="greeting">Welcome back, {{ greeting }}!</h1>
-
-      <div class="actions">
-        <button *ngIf="project.accessRights == accessRights.Owner" (click)="openAccessManagement()"><svg
-            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M19.79 14.9299C17.73 16.9799 14.78 17.6099 12.19 16.7999L7.48002 21.4999C7.14002 21.8499 6.47002 22.0599 5.99002 21.9899L3.81002 21.6899C3.09002 21.5899 2.42002 20.9099 2.31002 20.1899L2.01002 18.0099C1.94002 17.5299 2.17002 16.8599 2.50002 16.5199L7.20002 11.8199C6.40002 9.21995 7.02002 6.26995 9.08002 4.21995C12.03 1.26995 16.82 1.26995 19.78 4.21995C22.74 7.16995 22.74 11.9799 19.79 14.9299Z"
-              stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round">
-            </path>
-            <path d="M6.89001 17.49L9.19001 19.79" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-              stroke-linecap="round" stroke-linejoin="round"></path>
-            <path
-              d="M14.5 11C15.3284 11 16 10.3284 16 9.5C16 8.67157 15.3284 8 14.5 8C13.6716 8 13 8.67157 13 9.5C13 10.3284 13.6716 11 14.5 11Z"
-              stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>Manage Access</button>
-
-        <button *ngIf="project.accessRights !== accessRights.Read" (click)="openTaskCreation()"><svg viewBox="0 0 24 24"
-            fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 12H18" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            </path>
-            <path d="M12 18V6" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            </path>
-          </svg>New Task</button>
-      </div>
-    </div>
-
-    <div class="sorting">
-      <div #all class="all" (click)="selectSorting(all)">All Tasks</div>
-      <div #inProgress class="in-progress" (click)="selectSorting(inProgress)">In Progress</div>
-      <div #completed class="completed" (click)="selectSorting(completed)">Completed</div>
     </div>
 
     <div class="cards">
-      <div class="card" *ngFor="let task of tasks" (click)="viewTask(task.id)">
+      <div class="card" *ngFor="let task of tasks">
         <div>
           <h2>{{ task.title }}</h2>
           <p class="task-number">Task #{{ this.project.tasks!.indexOf(task) + 1 }}</p>
@@ -126,35 +96,21 @@
 
         <div>
           <div class="line"></div>
-
-          <button [ngClass]="{'completed': task.isCompleted}" (click)="changeCompletion(task)">
+          
+          <button [ngClass]="{'archived': task.isArchived}" (click)="changeArchivation(task)">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="#292D32"
-                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              </path>
-              <path d="M7.75 12L10.58 14.83L16.25 9.17004" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
-                stroke-linejoin="round"></path>
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier"> 
+                <path d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z" 
+                stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
+                <path d="M9.58997 11L11.09 12.5L15.09 8.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </g>
             </svg>
             <h4>
-              {{ task.isCompleted ? 'Completed' : 'Mark as completed' }}
+              {{ task.isArchived ? 'Archived' : 'Archive' }}
             </h4>
           </button>
-          <div class="archiv">
-            <button [ngClass]="{'archived': task.isArchived}" (click)="changeArchivation(task)">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier"> 
-                  <path d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z" 
-                  stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
-                  <path d="M9.58997 11L11.09 12.5L15.09 8.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                </g>
-              </svg>
-              <h4>
-                {{ task.isArchived ? 'Archived' : 'Archive' }}
-              </h4>
-            </button>
-          </div>
         </div>
       </div>
     </div>

@@ -13,6 +13,18 @@ namespace Infrastructure.Repositories
         {
         }
 
+        public async System.Threading.Tasks.Task ChangeArchivationAsync(Guid id, CancellationToken cancellationToken)
+        {
+            Task? task = await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
+
+            if (task is null)
+            {
+                throw new TaskNotFoundException(id);
+            }
+
+            task.IsArchived = !task.IsArchived;
+        }
+
         public async System.Threading.Tasks.Task ChangeCompletionAsync(Guid id, CancellationToken cancellationToken)
         {
             Task? task = await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
@@ -23,6 +35,12 @@ namespace Infrastructure.Repositories
             }
 
             task.IsCompleted = !task.IsCompleted;
+        }
+
+        public async Task<List<Task>> GetArchivedTasksByEmailAsync(string email, CancellationToken cancellationToken)
+        {
+            var tasks = await _context.Tasks.Where(t => t.CreatedBy == email && t.IsArchived).ToListAsync();
+            return tasks;
         }
 
         public async Task<List<Task>> GetTasksByEmailAsync(string email, CancellationToken cancellationToken)

@@ -25,7 +25,22 @@ namespace Infrastructure.Repositories
         {
             var project = await _context.Projects
                 .AsNoTracking()
-                .Include(x => x.Tasks)
+                .Include(x => x.Tasks.Where(t => !t.IsArchived))
+                .FirstOrDefaultAsync(x => x.Id == projectId, cancellationToken);
+
+            if (project is null)
+            {
+                throw new ProjectNotFoundException(projectId);
+            }
+
+            return project;
+        }
+
+        public async Task<Project> GetProjectWithArchivedTasksAsync(Guid projectId, CancellationToken cancellationToken)
+        {
+            var project = await _context.Projects
+                .AsNoTracking()
+                .Include(x => x.Tasks.Where(t => t.IsArchived))
                 .FirstOrDefaultAsync(x => x.Id == projectId, cancellationToken);
 
             if (project is null)

@@ -1,7 +1,9 @@
 ﻿using Application.Labels.Commands.CreateLabel;
+using Application.Tasks.Commands.ChangeTaskArchivation;
 using Application.Tasks.Commands.ChangeTaskCompletion;
 using Application.Tasks.Commands.CreateTask;
 using Application.Tasks.Commands.UpdateTask;
+using Application.Tasks.Queries.GetArchivedTasks;
 using Application.Tasks.Queries.GetTasks;
 using Application.Tasks.Queries.GetTaskWithToDoItems;
 using MediatR;
@@ -43,12 +45,32 @@ namespace Presentation.Controllers
         }
 
         [Authorize]
+        [HttpPut("archive")]
+        public async Task ChangeArchivation([FromQuery] Guid id, CancellationToken cancellationToken)
+        {
+            var request = new ChangeTaskArchivationCommand() { Id = id };
+            await _mediator.Send(request, cancellationToken);
+        }
+
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllTasks(CancellationToken cancellationToken)
         {
             var userClaims = User.Claims;
             var email = userClaims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")!.Value;
             var request = new GetTasksQuery() { Email = email };
+
+            var response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpGet("archived-tasks")]
+        public async Task<IActionResult> GetArchivedTasks(CancellationToken cancellationToken)
+        {
+            var userClaims = User.Claims;
+            var email = userClaims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")!.Value;
+            var request = new GetArchivedTasksQuery() { Email = email };
 
             var response = await _mediator.Send(request, cancellationToken);
             return Ok(response);

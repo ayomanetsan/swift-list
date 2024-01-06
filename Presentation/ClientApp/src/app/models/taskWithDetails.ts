@@ -27,6 +27,7 @@ export const EmptyTask: TaskWithDetails = {
     title: '',
     description: '',
     isCompleted: false,
+    isArchived: false,
     createdAt: new Date(),
     createdBy: '',
     dueDate: new Date(),
