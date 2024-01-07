@@ -83,10 +83,10 @@ export class ProjectViewComponent implements OnInit {
         this.tasks = this.project?.tasks?.filter(task => !task.isArchived) as Task[];
         break;
       case 'in-progress':
-        this.tasks = this.project?.tasks?.filter(task => !task.isCompleted && !task.isArchived) as Task[];
+        this.tasks = this.project?.tasks?.filter(task => !task.isCompleted) as Task[];
         break;
       case 'completed':
-        this.tasks = this.project?.tasks?.filter(task => task.isCompleted && !task.isArchived) as Task[];
+        this.tasks = this.project?.tasks?.filter(task => task.isCompleted) as Task[];
         break;
     }
   }
@@ -115,7 +115,10 @@ export class ProjectViewComponent implements OnInit {
   changeArchivation(task: Task) {
     this.tasksService.changeArchivation(task.id).subscribe();
     task.isArchived = !task.isArchived;
-    this.applySorting(this.elementRef.nativeElement.querySelector('.sorting > div.active').className.split(' ')[0]);
+    if (this.project && this.project.tasks) {
+      this.project.tasks = this.project.tasks.filter(task => !task.isArchived);
+      this.tasks = this.project.tasks;
+    }
   }
 
   openTaskCreation() {
@@ -131,6 +134,10 @@ export class ProjectViewComponent implements OnInit {
       }
     });
   }
+
+  preventViewTask(event: Event) {
+    event.stopPropagation();
+  }  
 
   public get accessRights(): typeof AccessRights {
     return AccessRights;

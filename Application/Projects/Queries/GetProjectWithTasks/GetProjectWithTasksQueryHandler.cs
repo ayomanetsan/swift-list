@@ -1,7 +1,8 @@
 ﻿using Application.Common.Interfaces;
 using AutoMapper;
-using Domain.Exceptions;
 using MediatR;
+using System.Linq.Expressions;
+using Task = Domain.Entities.Task;
 
 namespace Application.Projects.Queries.GetProjectWithTasks
 {
@@ -20,7 +21,7 @@ namespace Application.Projects.Queries.GetProjectWithTasks
         {
             var accessRights =
                 await _projectRepository.GetAccessRightsAsync(request.ProjectId, request.Email, cancellationToken);
-            var project = await _projectRepository.GetProjectWithTasksAsync(request.ProjectId, cancellationToken);
+            var project = await _projectRepository.GetProjectWithTasksAsync(request.ProjectId, t => !t.IsArchived, cancellationToken);
 
             var projectResponse = _mapper.Map<ProjectResponse>(project);
             projectResponse.AccessRights = accessRights;

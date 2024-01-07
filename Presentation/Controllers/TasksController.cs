@@ -3,13 +3,11 @@ using Application.Tasks.Commands.ChangeTaskArchivation;
 using Application.Tasks.Commands.ChangeTaskCompletion;
 using Application.Tasks.Commands.CreateTask;
 using Application.Tasks.Commands.UpdateTask;
-using Application.Tasks.Queries.GetArchivedTasks;
 using Application.Tasks.Queries.GetTasks;
 using Application.Tasks.Queries.GetTaskWithToDoItems;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading;
 
 namespace Presentation.Controllers
 {
@@ -59,18 +57,6 @@ namespace Presentation.Controllers
             var userClaims = User.Claims;
             var email = userClaims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")!.Value;
             var request = new GetTasksQuery() { Email = email };
-
-            var response = await _mediator.Send(request, cancellationToken);
-            return Ok(response);
-        }
-
-        [Authorize]
-        [HttpGet("archived-tasks")]
-        public async Task<IActionResult> GetArchivedTasks(CancellationToken cancellationToken)
-        {
-            var userClaims = User.Claims;
-            var email = userClaims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")!.Value;
-            var request = new GetArchivedTasksQuery() { Email = email };
 
             var response = await _mediator.Send(request, cancellationToken);
             return Ok(response);

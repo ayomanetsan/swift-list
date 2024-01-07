@@ -37,12 +37,6 @@ namespace Infrastructure.Repositories
             task.IsCompleted = !task.IsCompleted;
         }
 
-        public async Task<List<Task>> GetArchivedTasksByEmailAsync(string email, CancellationToken cancellationToken)
-        {
-            var tasks = await _context.Tasks.Where(t => t.CreatedBy == email && t.IsArchived).ToListAsync();
-            return tasks;
-        }
-
         public async Task<List<Task>> GetTasksByEmailAsync(string email, CancellationToken cancellationToken)
         {
             var tasks = await _context.Tasks.Where(t => t.CreatedBy == email).ToListAsync();

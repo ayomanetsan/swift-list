@@ -8,6 +8,6 @@ namespace Domain.Entities
 
         public required string Description { get; set; }
 
-        public ICollection<Task> Tasks { get; private set; } = new List<Task>();
+        public ICollection<Task> Tasks { get; set; } = new List<Task>();
     }
 }
