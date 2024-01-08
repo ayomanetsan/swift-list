@@ -1,0 +1,42 @@
+<div class="container">
+  <h1>Discover Users</h1>
+
+  <div class="sorting">
+    <div (click)="displayAll = true" [ngClass]="displayAll ? 'active' : ''">All Users</div>
+    <div (click)="displayAll = false" [ngClass]="!displayAll ? 'active' : ''">Friends</div>
+  </div>
+
+  <div class="users" *ngIf="displayAll">
+    <div class="user" *ngFor="let user of users">
+      <div>
+        <h2>{{ user.fullname }}</h2>
+        <p>{{ user.email }}</p>
+      </div>
+      <div>
+        <div class="line"></div>
+        <button (click)="sendFriendRequest(user.email, user.fullname)">
+          <h4>Add Friend</h4>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="users" *ngIf="!displayAll">
+    <div class="user" *ngFor="let friend of friends">
+      <div *ngIf="friend.userEmail !== userEmail">
+        <h2>{{ friend.userFullname }}</h2>
+        <p>{{ friend.userEmail }}</p>
+      </div>
+      <div *ngIf="friend.userEmail === userEmail">
+        <h2>{{ friend.requesterFullname }}</h2>
+        <p>{{ friend.requesterEmail }}</p>
+      </div>
+      <div>
+        <div class="line"></div>
+        <button (click)="handleFriendRequest(friend)">
+          <h4>{{ friend.friendshipStatus === frienshipStatus.Accepted ? 'Remove Friend' : friend.requesterEmail === userEmail ? 'Pending Friend Request' : 'Accept Friend Request' }}</h4>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

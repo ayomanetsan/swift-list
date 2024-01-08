@@ -101,6 +101,8 @@ namespace Infrastructure.Repositories
                     await _context.AddAsync(friend, cancellationToken);
                     break;
                 case { FriendshipStatus: FriendshipStatus.Rejected }:
+                    friend.UserId = user.Id;
+                    friend.RequesterId = requester.Id;
                     friend.FriendshipStatus = FriendshipStatus.Pending;
                     break;
             }

@@ -25,6 +25,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ProjectAccessComponent } from './components/project-access/project-access.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MatInputModule } from '@angular/material/input';
     ProjectViewComponent,
     TaskDetailsComponent,
     PageNotFoundComponent,
-    ProjectAccessComponent
+    ProjectAccessComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

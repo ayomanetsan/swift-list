@@ -44,9 +44,12 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("friends")]
-    public async Task<IActionResult> GetFriends(GetFriendsQuery request, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetFriends(CancellationToken cancellationToken)
     {
-        var response = await _mediator.Send(request, cancellationToken);
+        var userClaims = User.Claims;
+        var email = userClaims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress").Value;
+
+        var response = await _mediator.Send(new GetFriendsQuery() { Email = email}, cancellationToken);
         return Ok(response);
     }
 }
