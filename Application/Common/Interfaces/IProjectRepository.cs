@@ -9,9 +9,7 @@ public interface IProjectRepository : IRepository<Project>
 {
     Task<IEnumerable<Project>> GetProjectsWithoutTasksAsync(string email, CancellationToken cancellationToken);
 
-    Task<Project> GetProjectWithTasksAsync(Guid projectId, Func<Task, bool> taskPredicate, CancellationToken cancellationToken);
-
-    //Task<Project> GetProjectWithArchivedTasksAsync(Guid projectId, CancellationToken cancellationToken);
+    Task<Project> GetProjectWithTasksAsync(Guid projectId, bool taskPredicate, CancellationToken cancellationToken);
 
     Task<AccessRights> GetAccessRightsAsync(Guid projectId, string email, CancellationToken cancellationToken);
 

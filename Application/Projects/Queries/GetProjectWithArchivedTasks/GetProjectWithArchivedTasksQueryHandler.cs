@@ -18,7 +18,7 @@ public sealed class GetProjectWithArchivedTasksQueryHandler : IRequestHandler<Ge
     {
         var accessRights =
                 await _projectRepository.GetAccessRightsAsync(request.ProjectId, request.Email, cancellationToken);
-        var project = await _projectRepository.GetProjectWithTasksAsync(request.ProjectId, t => t.IsArchived, cancellationToken);
+        var project = await _projectRepository.GetProjectWithTasksAsync(request.ProjectId, true, cancellationToken);
 
         var projectResponse = _mapper.Map<ProjectResponse>(project);
         projectResponse.AccessRights = accessRights;

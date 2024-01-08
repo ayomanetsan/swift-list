@@ -23,19 +23,17 @@ namespace Infrastructure.Repositories
                 .ToListAsync(cancellationToken);
         }
 
-        public async Task<Project> GetProjectWithTasksAsync(Guid projectId, Func<Task, bool> taskPredicate, CancellationToken cancellationToken)
+        public async Task<Project> GetProjectWithTasksAsync(Guid projectId, bool taskPredicate, CancellationToken cancellationToken)
         {
             var project = await _context.Projects
                 .AsNoTracking()
-                .Include(x => x.Tasks)
+                .Include(x => x.Tasks.Where(t => t.IsArchived == taskPredicate))
                 .FirstOrDefaultAsync(x => x.Id == projectId, cancellationToken);
 
             if (project is null)
             {
                 throw new ProjectNotFoundException(projectId);
             }
-
-            project.Tasks = project.Tasks.Where(taskPredicate).ToList();
 
             return project;
         }
