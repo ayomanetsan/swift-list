@@ -4,6 +4,8 @@ using Domain.Enums;
 using Domain.Exceptions;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using Task = Domain.Entities.Task;
 
 namespace Infrastructure.Repositories
 {
@@ -21,11 +23,11 @@ namespace Infrastructure.Repositories
                 .ToListAsync(cancellationToken);
         }
 
-        public async Task<Project> GetProjectWithTasksAsync(Guid projectId, CancellationToken cancellationToken)
+        public async Task<Project> GetProjectWithTasksAsync(Guid projectId, bool taskPredicate, CancellationToken cancellationToken)
         {
             var project = await _context.Projects
                 .AsNoTracking()
-                .Include(x => x.Tasks)
+                .Include(x => x.Tasks.Where(t => t.IsArchived == taskPredicate))
                 .FirstOrDefaultAsync(x => x.Id == projectId, cancellationToken);
 
             if (project is null)

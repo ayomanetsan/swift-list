@@ -2,6 +2,7 @@
 using Application.Projects.Commands.GrantAccessRights;
 using Application.Projects.Queries.GetProjectAccessRights;
 using Application.Projects.Queries.GetProjectsWithoutTasks;
+using Application.Projects.Queries.GetProjectWithArchivedTasks;
 using Application.Projects.Queries.GetProjectWithTasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -44,13 +45,24 @@ namespace Presentation.Controllers
         }
 
         [Authorize]
-        [HttpGet("get/{projectId}")]
+        [HttpGet("get-tasks/{projectId}")]
         public async Task<IActionResult> GetProjectWithTasks(Guid projectId, CancellationToken cancellationToken)
         {
             var userClaims = User.Claims;
             var email = userClaims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")!.Value;
             
             var response = await _mediator.Send(new GetProjectWithTasksQuery { ProjectId = projectId, Email = email }, cancellationToken);
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpGet("get-archived-tasks/{projectId}")]
+        public async Task<IActionResult> GetProjectWithArchivedTasks(Guid projectId, CancellationToken cancellationToken)
+        {
+            var userClaims = User.Claims;
+            var email = userClaims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")!.Value;
+
+            var response = await _mediator.Send(new GetProjectWithArchivedTasksQuery { ProjectId = projectId, Email = email }, cancellationToken);
             return Ok(response);
         }
 

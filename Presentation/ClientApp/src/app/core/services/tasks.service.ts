@@ -26,6 +26,10 @@ export class TasksService {
     return this.http.put(`tasks/mark/?id=${id}`, { });
   }
 
+  changeArchivation(id: string) {
+    return this.http.put(`tasks/archive/?id=${id}`, { });
+  }
+
   changeToDoItemCompletion(id: string) {
     return this.http.put(`tasks/markToDoItem/?id=${id}`, { });
   }
