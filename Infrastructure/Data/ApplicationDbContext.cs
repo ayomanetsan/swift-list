@@ -15,6 +15,8 @@ namespace Infrastructure.Data
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectUsers> ProjectUsers { get; set; }
+        
+        public DbSet<Friend> Friends { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
