@@ -1,6 +1,7 @@
 ﻿using Application.Common.Interfaces;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Enums;
 using MediatR;
 
 namespace Application.Projects.Commands.CreateProject
@@ -22,6 +23,8 @@ namespace Application.Projects.Commands.CreateProject
         {
             Project project = _mapper.Map<Project>(request);
             _projectRepository.Create(project);
+            await _projectRepository.GrantAccessRightsAsync(project.Id, project.CreatedBy!, AccessRights.Admin,
+                cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return project.Id;

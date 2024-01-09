@@ -1,7 +1,8 @@
 ﻿using Application.Common.Interfaces;
 using AutoMapper;
-using Domain.Exceptions;
 using MediatR;
+using System.Linq.Expressions;
+using Task = Domain.Entities.Task;
 
 namespace Application.Projects.Queries.GetProjectWithTasks
 {
@@ -18,14 +19,13 @@ namespace Application.Projects.Queries.GetProjectWithTasks
 
         public async Task<ProjectResponse> Handle(GetProjectWithTasksQuery request, CancellationToken cancellationToken)
         {
-            var project = await _projectRepository.GetProjectWithTasksAsync(request.ProjectId, cancellationToken);
+            var accessRights =
+                await _projectRepository.GetAccessRightsAsync(request.ProjectId, request.Email, cancellationToken);
+            var project = await _projectRepository.GetProjectWithTasksAsync(request.ProjectId, false, cancellationToken);
 
-            if (project is null)
-            {
-                throw new ProjectNotFoundException(request.ProjectId);
-            }
-
-            return _mapper.Map<ProjectResponse>(project);
+            var projectResponse = _mapper.Map<ProjectResponse>(project);
+            projectResponse.AccessRights = accessRights;
+            return projectResponse;
         }
     }
 }

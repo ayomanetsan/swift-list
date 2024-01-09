@@ -1,0 +1,25 @@
+<div id="toast" class="container">
+  <h1>Share {{ data.title }}</h1>
+  <form [formGroup]="createForm" (ngSubmit)="grantAccessRights()">
+    <input type="text" id="email" formControlName="email" placeholder="Add people" />
+    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+      <div *ngIf="email?.errors?.['email']">Email is not valid.</div>
+    </div>
+
+    <button type="submit" [disabled]="createForm.invalid" *ngIf="email?.value">Share</button>
+  </form>
+
+  <div class="users" *ngIf="!email?.value">
+    <div class="user" *ngFor="let user of users">
+      <div class="info">
+        <h3>{{ user.fullname }}</h3>
+        <p>{{ user.email }}</p>
+      </div>
+      <mat-form-field>
+        <mat-select [(value)]="user.accessRights" [disabled]="user.accessRights == accessRights.Owner" (selectionChange)="updateAccessRights(user.email, user.accessRights)">
+          <mat-option *ngFor="let key of accessRightsKeys" [value]="key">{{ accessRights[key] }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

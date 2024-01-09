@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { TasksService } from 'src/app/core/services/tasks.service';
-import { Project } from 'src/app/models/project';
+import { AccessRights, Project } from 'src/app/models/project';
 import { Task } from 'src/app/models/task';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
+import { ProjectAccessComponent } from '../project-access/project-access.component';
 
 @Component({
   selector: 'app-project-view',
@@ -24,6 +25,7 @@ export class ProjectViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
+    private router: Router,
     private tasksService: TasksService,
     private dialogRef: MatDialog,
     private elementRef: ElementRef
@@ -38,10 +40,12 @@ export class ProjectViewComponent implements OnInit {
       (res: Project | null) => {
         this.project = res;
         this.tasks = res?.tasks as Task[];
+      },
+      err => {
+        this.router.navigate(['/page-not-found']);
       });
 
     this.greeting = localStorage.getItem('userName')?.split(' ')[0] as string;
-    this.elementRef.nativeElement.querySelector('.sorting > div:first-child').classList.add('active');
   }
 
   openDialog() {
@@ -75,7 +79,7 @@ export class ProjectViewComponent implements OnInit {
   applySorting(sorting: string) {
     switch (sorting) {
       case 'all':
-        this.tasks = this.project?.tasks as Task[];
+        this.tasks = this.project?.tasks?.filter(task => !task.isArchived) as Task[];
         break;
       case 'in-progress':
         this.tasks = this.project?.tasks?.filter(task => !task.isCompleted) as Task[];
@@ -107,8 +111,34 @@ export class ProjectViewComponent implements OnInit {
     this.applySorting(this.elementRef.nativeElement.querySelector('.sorting > div.active').className.split(' ')[0]);
   }
 
+  changeArchivation(task: Task) {
+    this.tasksService.changeArchivation(task.id).subscribe();
+    task.isArchived = !task.isArchived;
+    if (this.project && this.project.tasks) {
+      this.project.tasks = this.project.tasks.filter(task => !task.isArchived);
+      this.tasks = this.project.tasks;
+    }
+  }
+
   openTaskCreation() {
     this.elementRef.nativeElement.querySelector('.task-details').classList.remove('invisible');
     this.taskId = '00000000-0000-0000-0000-000000000000';
+  }
+
+  openAccessManagement() {
+    this.dialogRef.open(ProjectAccessComponent, {
+      data: {
+        title: this.project?.title,
+        projectId: this.id
+      }
+    });
+  }
+
+  preventViewTask(event: Event) {
+    event.stopPropagation();
+  }  
+
+  public get accessRights(): typeof AccessRights {
+    return AccessRights;
   }
 }

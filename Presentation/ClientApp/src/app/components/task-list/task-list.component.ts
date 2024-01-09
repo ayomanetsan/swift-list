@@ -48,4 +48,9 @@ export class TaskListComponent {
     task.isCompleted = !task.isCompleted;
   }
 
+  changeArchivation(task: Task) {
+    this.tasksService.changeArchivation(task.id).subscribe();
+    task.isArchived = !task.isArchived;
+  }
+
 }

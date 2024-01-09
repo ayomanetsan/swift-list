@@ -1,14 +1,13 @@
 ﻿using Application.Labels.Commands.CreateLabel;
+using Application.Tasks.Commands.ChangeTaskArchivation;
 using Application.Tasks.Commands.ChangeTaskCompletion;
 using Application.Tasks.Commands.CreateTask;
 using Application.Tasks.Commands.UpdateTask;
 using Application.Tasks.Queries.GetTasks;
 using Application.Tasks.Queries.GetTaskWithToDoItems;
-using Azure.Core;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading;
 
 namespace Presentation.Controllers
 {
@@ -40,6 +39,14 @@ namespace Presentation.Controllers
         public async Task ChangeCompletion([FromQuery] Guid id, CancellationToken cancellationToken)
         {
             var request = new ChangeTaskCompletionCommand() { Id = id };
+            await _mediator.Send(request, cancellationToken);
+        }
+
+        [Authorize]
+        [HttpPut("archive")]
+        public async Task ChangeArchivation([FromQuery] Guid id, CancellationToken cancellationToken)
+        {
+            var request = new ChangeTaskArchivationCommand() { Id = id };
             await _mediator.Send(request, cancellationToken);
         }
 

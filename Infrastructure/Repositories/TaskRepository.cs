@@ -2,11 +2,7 @@
 using Domain.Exceptions;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
-using System.Text.Json;
 using Task = Domain.Entities.Task;
-using Azure.Core;
-using System.Linq;
 
 namespace Infrastructure.Repositories
 {
@@ -15,6 +11,18 @@ namespace Infrastructure.Repositories
         public TaskRepository(ApplicationDbContext context) 
             : base(context)
         {
+        }
+
+        public async System.Threading.Tasks.Task ChangeArchivationAsync(Guid id, CancellationToken cancellationToken)
+        {
+            Task? task = await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
+
+            if (task is null)
+            {
+                throw new TaskNotFoundException(id);
+            }
+
+            task.IsArchived = !task.IsArchived;
         }
 
         public async System.Threading.Tasks.Task ChangeCompletionAsync(Guid id, CancellationToken cancellationToken)

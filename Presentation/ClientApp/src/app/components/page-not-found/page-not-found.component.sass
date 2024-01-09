@@ -1,0 +1,57 @@
+@import 'src/styles.sass'
+
+.container
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  height: 100vh
+  overflow-y: hidden
+
+  h1
+    font-size: 5rem
+
+  h2
+    font-size: 2rem
+    opacity: .7
+
+  .info
+    margin-top: 32px
+    width: 65%
+
+    p
+      font-size: 1.75rem
+      font-weight: 500
+      width: 37ch
+
+    ul
+      li
+        margin-top: 32px
+        margin-left: 24px
+        font-size: 1.25rem
+        font-weight: 600
+
+    a
+      display: inline-block
+      margin-top: 32px
+      padding: 8px 16px
+      border-radius: 5px
+      background: $accent-color
+      outline: none
+      font-size: 2rem
+      color: $primary-color
+      font-family: 'Bricolage Grotesque', sans-serif
+      font-weight: 700
+      text-decoration: none
+
+      &:hover
+        opacity: .9
+        transition: .3s
+
+  img
+    position: absolute
+    top: 250px
+    right: 150px
+    aspect-ratio: 1
+    height: 500px

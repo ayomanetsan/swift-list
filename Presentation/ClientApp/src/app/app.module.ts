@@ -21,6 +21,12 @@ import { ProjectViewComponent } from './components/project-view/project-view.com
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ProjectAccessComponent } from './components/project-access/project-access.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { ProjectViewArchivedComponent } from './components/project-view-archived/project-view-archived.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +40,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     TaskListComponent,
     ProjectDialogComponent,
     ProjectViewComponent,
-    TaskDetailsComponent
+    TaskDetailsComponent,
+    PageNotFoundComponent,
+    ProjectAccessComponent,
+    UserListComponent,
+    ProjectViewArchivedComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +56,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatDialogModule,
     MatNativeDateModule,
+    MatInputModule,
+    MatSelectModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       preventDuplicates: true,
