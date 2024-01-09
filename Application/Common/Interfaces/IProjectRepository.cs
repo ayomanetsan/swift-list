@@ -1,5 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
+using System.Linq.Expressions;
+using Task = Domain.Entities.Task;
 
 namespace Application.Common.Interfaces;
 
@@ -7,7 +9,7 @@ public interface IProjectRepository : IRepository<Project>
 {
     Task<IEnumerable<Project>> GetProjectsWithoutTasksAsync(string email, CancellationToken cancellationToken);
 
-    Task<Project> GetProjectWithTasksAsync(Guid projectId, CancellationToken cancellationToken);
+    Task<Project> GetProjectWithTasksAsync(Guid projectId, bool taskPredicate, CancellationToken cancellationToken);
 
     Task<AccessRights> GetAccessRightsAsync(Guid projectId, string email, CancellationToken cancellationToken);
 

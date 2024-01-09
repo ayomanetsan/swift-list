@@ -13,6 +13,18 @@ namespace Infrastructure.Repositories
         {
         }
 
+        public async System.Threading.Tasks.Task ChangeArchivationAsync(Guid id, CancellationToken cancellationToken)
+        {
+            Task? task = await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
+
+            if (task is null)
+            {
+                throw new TaskNotFoundException(id);
+            }
+
+            task.IsArchived = !task.IsArchived;
+        }
+
         public async System.Threading.Tasks.Task ChangeCompletionAsync(Guid id, CancellationToken cancellationToken)
         {
             Task? task = await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id, cancellationToken);

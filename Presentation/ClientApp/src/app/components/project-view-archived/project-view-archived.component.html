@@ -1,6 +1,5 @@
 <div class="container" *ngIf="project">
-  <app-task-details class="task-details invisible" [taskId]="taskId" [projectId]="this.id"
-    (updatedTask)="updateTasks($event)"></app-task-details>
+  <app-task-details class="task-details invisible" [taskId]="taskId" [projectId]="this.id"></app-task-details>
 
   <div class="info">
     <h1 class="project-name">{{ project.title }}</h1>
@@ -16,7 +15,7 @@
             stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>All Tasks</a>
 
-      <!-- <a class="tab" routerLink="{{baseUrl}}/progress/{{id}}" routerLinkActive="active">
+      <a class="tab" routerLink="{{baseUrl}}/progress/{{id}}" routerLinkActive="active">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M8.67 14H4C2.9 14 2 14.9 2 16V22H8.67V14Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
             stroke-linecap="round" stroke-linejoin="round"></path>
@@ -28,9 +27,9 @@
           <path
             d="M12.52 2.07007L13.05 3.13006C13.12 3.28006 13.31 3.42006 13.47 3.44006L14.43 3.60007C15.04 3.70007 15.19 4.15005 14.75 4.58005L14 5.33005C13.87 5.46005 13.8 5.70006 13.84 5.87006L14.05 6.79007C14.22 7.52007 13.83 7.80007 13.19 7.42007L12.29 6.89007C12.13 6.79007 11.86 6.79007 11.7 6.89007L10.8 7.42007C10.16 7.80007 9.76998 7.52007 9.93998 6.79007L10.15 5.87006C10.19 5.70006 10.12 5.45005 9.98999 5.33005L9.24999 4.59006C8.80999 4.15006 8.94999 3.71005 9.56999 3.61005L10.53 3.45007C10.69 3.42007 10.88 3.28007 10.95 3.14007L11.48 2.08005C11.77 1.50005 12.23 1.50007 12.52 2.07007Z"
             stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>Progress</a> -->
+        </svg>Progress</a>
 
-      <!-- <a class="tab" routerLink="{{baseUrl}}/notes/{{id}}" routerLinkActive="active"><svg viewBox="0 0 24 24"
+      <a class="tab" routerLink="{{baseUrl}}/notes/{{id}}" routerLinkActive="active"><svg viewBox="0 0 24 24"
           fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M18.63 7.1499C18.67 7.7599 18.62 8.4499 18.5 9.2199L17.77 13.9099C17.15 17.8199 15.34 19.1399 11.43 18.5299L6.73999 17.7899C5.38999 17.5799 4.34999 17.2199 3.58999 16.6799C2.13999 15.6699 1.71999 14.0099 2.11999 11.4499L2.85999 6.7599C3.47999 2.8499 5.28999 1.5299 9.19999 2.1399L13.89 2.8799C17.03 3.3699 18.5 4.6499 18.63 7.1499Z"
@@ -41,9 +40,9 @@
           <path
             d="M8.24 8.98C9.20098 8.98 9.98 8.20098 9.98 7.24C9.98 6.27902 9.20098 5.5 8.24 5.5C7.27902 5.5 6.5 6.27902 6.5 7.24C6.5 8.20098 7.27902 8.98 8.24 8.98Z"
             stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>Notes</a> -->
+        </svg>Notes</a>
 
-      <!-- <a class="tab" routerLink="{{baseUrl}}/important/{{id}}" routerLinkActive="active">
+      <a class="tab" routerLink="{{baseUrl}}/important/{{id}}" routerLinkActive="active">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M9.31993 13.28H12.4099V20.48C12.4099 21.54 13.7299 22.04 14.4299 21.24L21.9999 12.64C22.6599 11.89 22.1299 10.72 21.1299 10.72H18.0399V3.51997C18.0399 2.45997 16.7199 1.95997 16.0199 2.75997L8.44994 11.36C7.79994 12.11 8.32993 13.28 9.31993 13.28Z"
@@ -55,7 +54,7 @@
             stroke-linejoin="round"></path>
           <path d="M4.5 12H1.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
             stroke-linejoin="round"></path>
-        </svg>Important</a> -->
+        </svg>Important</a>
 
       <a class="tab" routerLink="{{baseUrl}}/archive/{{id}}" routerLinkActive="active">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +65,7 @@
             stroke-linejoin="round"></path>
         </svg>Archive</a>
 
-      <!-- <a class="tab" routerLink="{{baseUrl}}/reminders/{{id}}" routerLinkActive="active"><svg viewBox="0 0 24 24"
+      <a class="tab" routerLink="{{baseUrl}}/reminders/{{id}}" routerLinkActive="active"><svg viewBox="0 0 24 24"
           fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M10.49 2.23006L5.50003 4.10006C4.35003 4.53006 3.41003 5.89006 3.41003 7.12006V14.5501C3.41003 15.7301 4.19005 17.2801 5.14005 17.9901L9.44003 21.2001C10.85 22.2601 13.17 22.2601 14.58 21.2001L18.88 17.9901C19.83 17.2801 20.61 15.7301 20.61 14.5501V7.12006C20.61 5.89006 19.67 4.53006 18.52 4.10006L13.53 2.23006C12.68 1.92006 11.32 1.92006 10.49 2.23006Z"
@@ -78,46 +77,17 @@
           <path d="M12.25 10.25V11.18C12.25 11.53 12.07 11.86 11.76 12.04L11 12.5" stroke="#292D32" stroke-width="1.5"
             stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round">
           </path>
-        </svg>Reminders</a> -->
+        </svg>Reminders</a>
     </div>
   </div>
 
   <div class="tasks">
     <div class="header">
       <h1 class="greeting">Welcome back, {{ greeting }}!</h1>
-
-      <div class="actions">
-        <button *ngIf="project.accessRights == accessRights.Owner" (click)="openAccessManagement()"><svg
-            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M19.79 14.9299C17.73 16.9799 14.78 17.6099 12.19 16.7999L7.48002 21.4999C7.14002 21.8499 6.47002 22.0599 5.99002 21.9899L3.81002 21.6899C3.09002 21.5899 2.42002 20.9099 2.31002 20.1899L2.01002 18.0099C1.94002 17.5299 2.17002 16.8599 2.50002 16.5199L7.20002 11.8199C6.40002 9.21995 7.02002 6.26995 9.08002 4.21995C12.03 1.26995 16.82 1.26995 19.78 4.21995C22.74 7.16995 22.74 11.9799 19.79 14.9299Z"
-              stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round">
-            </path>
-            <path d="M6.89001 17.49L9.19001 19.79" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-              stroke-linecap="round" stroke-linejoin="round"></path>
-            <path
-              d="M14.5 11C15.3284 11 16 10.3284 16 9.5C16 8.67157 15.3284 8 14.5 8C13.6716 8 13 8.67157 13 9.5C13 10.3284 13.6716 11 14.5 11Z"
-              stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>Manage Access</button>
-
-        <button *ngIf="project.accessRights !== accessRights.Read" (click)="openTaskCreation()"><svg viewBox="0 0 24 24"
-            fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 12H18" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            </path>
-            <path d="M12 18V6" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            </path>
-          </svg>New Task</button>
-      </div>
-    </div>
-
-    <div class="sorting">
-      <div #all class="all active" (click)="selectSorting(all)">All Tasks</div>
-      <div #inProgress class="in-progress" (click)="selectSorting(inProgress)">In Progress</div>
-      <div #completed class="completed" (click)="selectSorting(completed)">Completed</div>
     </div>
 
     <div class="cards">
-      <div class="card" *ngFor="let task of tasks" (click)="viewTask(task.id)">
+      <div class="card" *ngFor="let task of tasks">
         <div>
           <h2>{{ task.title }}</h2>
           <p class="task-number">Task #{{ this.project.tasks!.indexOf(task) + 1 }}</p>
@@ -126,35 +96,21 @@
 
         <div>
           <div class="line"></div>
-
-        <div class="button-container" (click)="preventViewTask($event)">
-          <button [ngClass]="{'completed': task.isCompleted}" (click)="changeCompletion(task)">
+          
+          <button [ngClass]="{'archived': task.isArchived}" (click)="changeArchivation(task)">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="#292D32"
-                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              </path>
-              <path d="M7.75 12L10.58 14.83L16.25 9.17004" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
-                stroke-linejoin="round"></path>
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier"> 
+                <path d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z" 
+                stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
+                <path d="M9.58997 11L11.09 12.5L15.09 8.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </g>
             </svg>
             <h4>
-              {{ task.isCompleted ? 'Completed' : 'Mark as completed' }}
+              {{ task.isArchived ? 'Archived' : 'Archive' }}
             </h4>
           </button>
-          <div class="archive-button">
-            <button [ngClass]="{'archived': task.isArchived}" (click)="changeArchivation(task)">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier"> 
-                  <path d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z" 
-                  stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
-                  <path d="M9.58997 11L11.09 12.5L15.09 8.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                </g>
-              </svg>
-            </button>
-        </div>
-
-          </div>
         </div>
       </div>
     </div>

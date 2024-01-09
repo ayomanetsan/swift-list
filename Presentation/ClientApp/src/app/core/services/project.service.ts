@@ -12,7 +12,11 @@ export class ProjectService {
   constructor(private http: HttpService) { }
 
   get(id: string) {
-    return this.http.get<Project | null>(`projects/get/${id}`);
+    return this.http.get<Project | null>(`projects/get-tasks/${id}`);
+  }
+
+  getArchived(id: string) {
+    return this.http.get<Project | null>(`projects/get-archived-tasks/${id}`);
   }
 
   getAll() {

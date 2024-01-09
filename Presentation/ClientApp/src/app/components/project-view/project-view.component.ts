@@ -79,7 +79,7 @@ export class ProjectViewComponent implements OnInit {
   applySorting(sorting: string) {
     switch (sorting) {
       case 'all':
-        this.tasks = this.project?.tasks as Task[];
+        this.tasks = this.project?.tasks?.filter(task => !task.isArchived) as Task[];
         break;
       case 'in-progress':
         this.tasks = this.project?.tasks?.filter(task => !task.isCompleted) as Task[];
@@ -111,6 +111,15 @@ export class ProjectViewComponent implements OnInit {
     this.applySorting(this.elementRef.nativeElement.querySelector('.sorting > div.active').className.split(' ')[0]);
   }
 
+  changeArchivation(task: Task) {
+    this.tasksService.changeArchivation(task.id).subscribe();
+    task.isArchived = !task.isArchived;
+    if (this.project && this.project.tasks) {
+      this.project.tasks = this.project.tasks.filter(task => !task.isArchived);
+      this.tasks = this.project.tasks;
+    }
+  }
+
   openTaskCreation() {
     this.elementRef.nativeElement.querySelector('.task-details').classList.remove('invisible');
     this.taskId = '00000000-0000-0000-0000-000000000000';
@@ -124,6 +133,10 @@ export class ProjectViewComponent implements OnInit {
       }
     });
   }
+
+  preventViewTask(event: Event) {
+    event.stopPropagation();
+  }  
 
   public get accessRights(): typeof AccessRights {
     return AccessRights;
