@@ -25,6 +25,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ProjectAccessComponent } from './components/project-access/project-access.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { UserListComponent } from './components/user-list/user-list.component';
 import { ProjectViewArchivedComponent } from './components/project-view-archived/project-view-archived.component';
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ProjectViewArchivedComponent } from './components/project-view-archived
     TaskDetailsComponent,
     PageNotFoundComponent,
     ProjectAccessComponent,
+    UserListComponent,
     ProjectViewArchivedComponent
   ],
   imports: [

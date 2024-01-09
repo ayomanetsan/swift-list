@@ -9,6 +9,7 @@ import { TaskListComponent } from './components/task-list/task-list.component';
 import { ProjectViewComponent } from './components/project-view/project-view.component';
 import { ProjectViewArchivedComponent } from './components/project-view-archived/project-view-archived.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'tasks', component: TaskListComponent },
       { path: 'projects', component: ProjectListComponent },
       { path: 'projects/tasks/:id', component: ProjectViewComponent },
+      { path: 'users', component: UserListComponent },
       { path: 'projects/archive/:id', component: ProjectViewArchivedComponent },
     ],
   },

@@ -46,7 +46,6 @@ export class ProjectViewComponent implements OnInit {
       });
 
     this.greeting = localStorage.getItem('userName')?.split(' ')[0] as string;
-    this.elementRef.nativeElement.querySelector('.sorting > div:first-child').classList.add('active');
   }
 
   openDialog() {
