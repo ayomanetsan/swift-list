@@ -7,7 +7,14 @@ using Presentation.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddUserSecrets<Program>();
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddUserSecrets<Program>();
+}
+else
+{
+    builder.Configuration.AddJsonFile("/etc/secrets/secrets.json");
+}
 
 // Add services to the container.
 
