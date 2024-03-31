@@ -4,8 +4,6 @@ using Domain.Enums;
 using Domain.Exceptions;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-using Task = Domain.Entities.Task;
 
 namespace Infrastructure.Repositories
 {
@@ -17,8 +15,9 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<Project>> GetProjectsWithoutTasksAsync(string email, CancellationToken cancellationToken)
         {
-            return await _context.Projects
-                .Where(x => x.CreatedBy == email)
+            return await _context.ProjectUsers
+                .Where(x => x.User.Email == email && x.AccessRights != AccessRights.None)
+                .Select(x => x.Project)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
