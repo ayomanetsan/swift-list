@@ -14,10 +14,8 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = Environment.GetEnvironmentVariable("DB_CONN");
-            //var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
             
-
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseNpgsql(connectionString, opt => opt.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.GetName().Name)) );
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
