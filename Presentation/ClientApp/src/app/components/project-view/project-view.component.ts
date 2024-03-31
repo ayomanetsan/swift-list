@@ -7,11 +7,13 @@ import { AccessRights, Project } from 'src/app/models/project';
 import { Task } from 'src/app/models/task';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 import { ProjectAccessComponent } from '../project-access/project-access.component';
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-project-view',
   templateUrl: './project-view.component.html',
-  styleUrls: ['./project-view.component.sass']
+  styleUrls: ['./project-view.component.sass'],
+  providers: [DatePipe]
 })
 export class ProjectViewComponent implements OnInit {
 
@@ -136,7 +138,7 @@ export class ProjectViewComponent implements OnInit {
 
   preventViewTask(event: Event) {
     event.stopPropagation();
-  }  
+  }
 
   public get accessRights(): typeof AccessRights {
     return AccessRights;

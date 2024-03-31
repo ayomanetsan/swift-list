@@ -13,6 +13,8 @@ namespace Application.Projects.Queries.GetProjectWithTasks
         public bool IsCompleted { get; set; }
 
         public bool IsArchived { get; set; }
+        
+        public DateTimeOffset DueDate { get; set; }
 
         private class MappingProfile : Profile
         {

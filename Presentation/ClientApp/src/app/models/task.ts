@@ -4,4 +4,5 @@ export interface Task {
     description: string;
     isCompleted: boolean;
     isArchived: boolean;
+    dueDate: Date;
 }
